@@ -60,7 +60,8 @@ Each prompt is preceded by an *encoding* like *AB.12* corresponding to the encod
 Since once big aim of this study is to determine whether generative AI may be able to produce high-quality in-between frames to ease post-production and filming re-runs, we test them on various well-known movies. We follow this format: 
 
 ```mermaid
-Image --> Image-to-video prompt --> Prompt to generate the image
+flowchart LR
+A["Image"] --> B["Image-to-video prompt"] --> C["Prompt to generate image"]
 ```
 
 #### Pinocchio
