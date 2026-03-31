@@ -6,22 +6,30 @@ We'll first define what we'd like to check and what style of video we're aiming 
 
 What we'll judge a model on:
 
-- Temporal consistency [1] (consistency across frames)
-- Motion realism [2] (accurate physical motion)
-- Camera behavior [3] (realistic/believable camera motion)
-- Lighting stability [4] (accurate light and shadows)
-- Character preservation [5] (definition/shape/body of a character is preserved throughout)
-- Prompt inference and context [6] (how well it understands the prompt and fills in the details)
+- **[1]** Temporal consistency (consistency across frames)
+- **[2]** Motion realism (accurate physical motion)
+- **[3]** Camera behavior (realistic/believable camera motion)
+- **[4]** Lighting stability (accurate light and shadows)
+- **[5]** Character preservation (definition/shape/body of a character is preserved throughout)
+- **[6]** Prompt inference and context (how well it understands the prompt and fills in the details)
+- **[7]** Object interaction & physics reasoning (contact, force, collisions, deformation)
+- **[8]** Multi-agent coordination (multiple entities interacting consistently over time)
+- **[9]** Fine-grained detail consistency (text, patterns, small features staying stable)
+- **[10]** Long-horizon coherence (same scene evolving over *longer duration* (10–30s))
+- **[11]** Editing / controllability (can the model follow specific constraints)
+- **[12]** Spatial reasoning & geometry (perspective correctness, occlusion, relative positioning)
+- **[13]** Text rendering (signs, labels, readable content)
 
 ## Animation styles
 
 Different types of animation or video styles:
 
-- Cartoon and stylized [A]
-- Anime [B] (exaggerated stylization)
-- Realistic/cinematic [C]
-- Hyper-realistic/photo-real [D]
-- Educational [E]
+- **[A]** Base (the default, with no stylization hints)
+- **[B]** Cartoon and stylized
+- **[C]** Anime (exaggerated stylization)
+- **[D]** Realistic/cinematic
+- **[E]** Hyper-realistic/photo-real
+- **[F]** Educational
 
 ## Creation methods
 
@@ -33,9 +41,38 @@ We plan multiple techniques to generate video:
 
 ## Prompts
 
-Finally, we list the prompts. Due to the different creation methods, we shall also partition this list to follow the creation methods listed above.
+Finally, we list the prompts. Due to the different creation methods, we shall also partition this list to follow the creation methods listed above. We also list [Targeted prompts](#targeted-prompts) which test exactly one of domains listed above to provide a neutral baseline.
 
-### Text-to-video
+### Targeted Prompts
+
+- **[1]** A single red cube sits on a white table in a well-lit room. The camera slowly moves in a small circle around the cube. The cube does not change shape, size, or color at any point.
+- **[2]** A blue rubber ball is dropped from a height onto a flat concrete floor. The ball bounces several times, with each bounce reaching a lower height than the previous one, following realistic motion.
+- **[3]** A stationary wooden chair is placed in the center of a room. The camera performs a smooth forward dolly movement toward the chair without shaking or sudden jumps.
+- **[4]** A white sphere is placed on a flat surface under a single fixed overhead light source. The camera remains still. The lighting and shadows remain consistent throughout the scene.
+- **[5]** A person wearing a plain green shirt and black pants walks in a straight line across a neutral background. Their appearance, clothing, and body proportions remain consistent throughout the video.
+- **[6]** A person enters a room, walks to a table, picks up a cup, and takes a sip. The sequence of actions should be clear and logically ordered.
+- **[7]** A hand pushes a glass across a table. The glass slides, slows down due to friction, and stops.
+- **[8]** Three identical spheres (red, blue, and green) roll forward at the same speed across a flat surface without changing color or size.
+- **[9]** A person walks behind a large box and then reappears on the other side. Their appearance remains consistent.
+- **[10]** A person wearing a shirt with thin horizontal stripes stands still while the camera slowly zooms in. The stripe pattern remains stable.
+- **[11]** A cube is placed in front of a sphere. The camera moves sideways, clearly showing that the cube remains closer to the camera than the sphere.
+- **[12]** A sign with the text "OPEN" is placed on a wall. The camera slowly moves closer while the text remains clear and readable.
+- **[A]** A cat walks from left to right across a room.
+- **[B]** A cartoon-style cat walks from left to right across a room. The shapes are simple and stylized, with clean outlines.
+- **[C]** An anime-style cat walks from left to right across a room. The design uses exaggerated stylization typical of anime.
+- **[D]** A realistic cat walks from left to right across a room. The scene uses natural lighting and believable textures.
+- **[E]** A highly detailed, photo-realistic cat walks from left to right across a room. The lighting, textures, and motion appear lifelike.
+- **[F]** A simple educational-style animation shows a cat walking from left to right across a room, clearly illustrating the motion.
+
+### Stress testing
+
+We now begin with the complicated prompts:
+
+1. A person prepares a cup of tea from start to finish: boiling water, pouring it into a cup, adding a tea bag, and letting it steep. The sequence is continuous and logically consistent.
+1. Two people sit across from each other at a table and pass a book back and forth. The interaction is smooth and coordinated.
+1. A busy street scene where cars move in one direction while pedestrians walk on the sidewalk. No objects collide, and motion remains consistent.
+
+#### Text-to-video
 
 Each prompt is preceded by an *encoding* like *AB.12* corresponding to the encoding listed in [Animation styles](#animation-styles) and [Things to check](#things-to-check).
 
@@ -55,7 +92,7 @@ Each prompt is preceded by an *encoding* like *AB.12* corresponding to the encod
 1. AB.46:  A hand-painted watercolor-style fox runs through a forest; the painterly texture stays consistent while motion remains smooth and believable.
 1. CD.1256:  A realistic car slowly transforms into a humanoid robot, with mechanical parts unfolding logically and no sudden shape popping.
 
-### Image-to-video
+#### Image-to-video
 
 Since once big aim of this study is to determine whether generative AI may be able to produce high-quality in-between frames to ease post-production and filming re-runs, we test them on various well-known movies. We follow this format: 
 
@@ -64,7 +101,7 @@ flowchart LR
 A["Image"] --> B["Image-to-video prompt"] --> C["Prompt to generate image"]
 ```
 
-#### Pinocchio
+##### Pinocchio
 
 ![pin-1](image.png)
 
