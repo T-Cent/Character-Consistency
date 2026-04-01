@@ -103,14 +103,14 @@ A["Image"] --> B["Image-to-video prompt"] --> C["Prompt to generate image"]
 
 ##### Pinocchio
 
-![pin-1](image.png)
+![pin-1](reference-images/image.png)
 
 A warm, cinematic stop-motion workshop scene at night. An elderly woodcarver with a thick white beard and suspenders stands at his wooden workbench, holding carving tools. A small wooden puppet boy with a pointed hat gently touches the man’s beard, smiling. Soft amber lantern light flickers in the background, casting moving shadows on hanging tools and wooden walls.
 The camera slowly pushes in with a subtle handheld feel. The lantern flame flickers naturally, creating warm shifting highlights and soft shadows across their faces. The puppet blinks, tilts his head curiously, and his wooden joints move with slight stop-motion stiffness. The old man’s eyes soften; he breathes gently and slightly lowers his tools. Fine dust particles float in the warm light. Cozy, emotional, magical atmosphere. Shallow depth of field, detailed wood textures, cinematic lighting, soft volumetric glow, high detail, 24fps, gentle natural motion.
 
 *Prompt for image generation*: A cozy, cinematic stop-motion style scene inside a rustic woodcarver’s workshop at night. An elderly craftsman with a thick white beard, bushy eyebrows, rolled-up sleeves, and suspenders stands at a wooden workbench holding carving tools. A small wooden puppet boy with carved joints, a pointed hat, and expressive eyes gently touches the man’s beard with curiosity and affection. Warm amber lantern light illuminates the scene, casting soft, flickering shadows on wooden walls covered with hanging tools and shelves. Fine wood dust floats in the air, glowing in the light beams. Highly detailed wood textures, handcrafted stop-motion aesthetic, shallow depth of field, soft volumetric lighting, cinematic composition, emotional and magical atmosphere, ultra-detailed, 4k, film still, warm color grading.
 
-![pin-2](image-1.png)
+![pin-2](reference-images/image-1.png)
 
 A handcrafted wooden puppet boy stands beside a round porthole window inside a softly lit wooden ship cabin at sunset. Golden sunlight pours through the circular window, reflecting off the calm ocean outside. The puppet’s carved wood grain face glows warmly, his glassy eyes wide with wonder as he gently places his hand on the window frame.
 The camera slowly drifts forward with a dreamy floating motion. Outside the porthole, the ocean sparkles with magical light particles, and faint shimmering fairy-like glows dance across the water’s surface. Soft golden dust motes swirl in the air inside the cabin, illuminated by sunbeams. The puppet slowly blinks, tilts his head in awe, and his wooden joints move delicately with subtle stop-motion charm.
@@ -120,7 +120,7 @@ A gentle magical breeze causes tiny glowing specks to drift through the window, 
 
 #### Pacific Rim
 
-![rim-1](image-2.png)
+![rim-1](reference-images/image-2.png)
 
 A colossal battle-worn combat mech strides through a stormy ocean shoreline, its massive steel legs crashing down into the surf. Sparks burst from its damaged shoulder armor, and flames flicker from exposed mechanical components. Water explodes upward with every step, sending shockwaves through the shallow sea. In the far foreground, a lone armored soldier runs across wet sand toward the horizon, dwarfed by the towering machine behind him.
 The camera begins low near the crashing water, then tilts upward to reveal the mech’s immense scale. Heavy rain slants across the frame. Explosions flare briefly from the mech’s upper body, sending debris and smoke into the wind. Each mechanical step lands with crushing weight, creating slow-motion water plumes and rippling shockwaves through the shoreline.
@@ -130,7 +130,7 @@ Ultra-cinematic, dramatic lighting, volumetric rain and mist, realistic water ph
 *Prompt for image generation*: A massive futuristic combat mech with battle damage and exposed glowing internal components strides through shallow ocean water near a stormy coastline. One shoulder burns with sparks and fire, smoke trailing into the wind. Each massive metal foot crashes into the surf, sending towering splashes into the air. In the distance on wet sand, a lone armored figure runs away, emphasizing the enormous scale of the machine.
 Dark overcast sky, cold blue-gray color palette, dramatic cinematic lighting, orange internal glow contrasting against storm tones, water spray frozen mid-air, detailed mechanical textures, rain and mist in the atmosphere, epic scale composition, low-angle perspective, IMAX-style framing, ultra-detailed, photorealistic, 4k, film still from a high-budget sci-fi war movie.
 
-![rim-2](image-3.png)
+![rim-2](reference-images/image-3.png)
 
 A massive armored combat mech stands in the middle of a modern city street surrounded by towering skyscrapers. It grips a gigantic rotating spiked turbine weapon connected by a heavy mechanical chain. The weapon glows molten orange at its core, spinning rapidly, sparks and embers flying outward as metal scrapes against metal.
 The camera starts low at street level, debris and broken asphalt in the foreground. The spiked turbine spins faster, glowing brighter, heat distortion warping the air around it. The mech plants its feet, servos whining and pistons compressing with immense force. Windows shatter in nearby buildings from the vibration.
@@ -142,7 +142,7 @@ Dynamic low-angle perspective emphasizing scale, towering buildings framing the 
 
 #### Wall-E
 
-![wall-1](image-4.png)
+![wall-1](reference-images/image-4.png)
 
 A small, weathered waste-collecting robot with binocular-style eyes sits inside a cozy cluttered metal container home filled with trinkets and salvaged treasures. Warm tungsten light glows from a small lamp, casting soft amber highlights across rusty metal textures. The robot holds a partially scrambled 3x3 color puzzle cube in his articulated claw hands.
 The camera slowly pushes in from over his shoulder. His mechanical eyes adjust focus with subtle whirring sounds. He tilts his head slightly, studying the cube. One finger carefully twists a row — click. Another rotation — click click. The colored squares begin aligning.
@@ -153,7 +153,7 @@ Stop-motion inspired charm blended with cinematic realism, shallow depth of fiel
 *Prompt for image generation*: A small, weathered yellow waste-collector robot with binocular-style eyes holds a colorful 3x3 puzzle cube in one claw hand inside a cozy cluttered metal container home. Warm amber lighting illuminates rusty textures and mechanical details. Shelves in the background are filled with small collected trinkets and objects. The robot’s eyes are expressive and curious, slightly tilted as if concentrating on solving the cube.
 Cinematic composition, shallow depth of field, soft warm tungsten light, floating dust particles, detailed worn metal textures, subtle reflections in glass lenses, heartwarming atmosphere, Pixar-inspired 3D animation style, ultra-detailed, 4k film still, cozy interior lighting, emotional and playful tone.
 
-![wall-2](image-5.png)
+![wall-2](reference-images/image-5.png)
 
 Black-and-white rough concept sketch of a small binocular-eyed robot standing near the edge of a cliff. The drawing is made of loose construction lines, visible guidelines, crosshatching, and unfinished strokes. The robot has thin mechanical legs, a boxy torso frame, and a large triangular thruster pack on its back.
 The sketch begins static like a still drawing on white paper.
@@ -175,7 +175,7 @@ Hand-drawn industrial design sketch style, storyboard concept art, visible sketc
 
 #### Wild Robot
 
-![wild-1](image-6.png)
+![wild-1](reference-images/image-6.png)
 
 A tall spherical-bodied forest robot stands at sunrise in a misty mountain valley. Burned trees surround the clearing, and soft golden light spills over distant hills. A few deer cautiously observe from the side. The robot’s glowing eyes shine gently against the warm dawn sky.
 The scene begins still.
@@ -194,7 +194,7 @@ End with a wide shot: robot silhouetted against sunrise, now partially covered i
 *Prompt for image generation*: A tall spherical forest robot with long articulated legs stands in a misty mountain clearing at sunrise. Burned tree trunks surround the area, but golden light floods the valley. Deer stand cautiously nearby. The robot has softly glowing blue eyes and weathered metallic textures with subtle moss growing along its lower limbs.
 Cinematic sunrise lighting, volumetric light rays, warm golden color palette, soft atmospheric haze, epic scale composition, nature reclaiming technology theme, emotional tone, ultra-detailed textures, shallow depth of field, film still from a poetic sci-fi drama, 4k, dramatic yet hopeful mood.
 
-![wild-2](image-7.png)
+![wild-2](reference-images/image-7.png)
 
 A gentle spherical forest robot sits on a sunlit grassy hill at golden hour. A curious red fox sits close beside it, softly touching its nose to the robot’s hand. The sky is pastel blue with warm sunset light glowing along the horizon.
 The scene begins still.
@@ -210,7 +210,7 @@ Soft pastel sky, tall grass moving in warm breeze, emotional cinematic compositi
 
 #### Southpaw
 
-![paw-1](image-8.png)
+![paw-1](reference-images/image-8.png)
 
 A professional boxer stands inside a brightly lit arena ring, sweat covering his defined torso. Overhead stadium lights create dramatic rim lighting across his shoulders, chest, and abs. The crowd is blurred in darkness beyond the ropes.
 The camera starts in ultra-tight close-up on his torso — shallow depth of field. His chest rises slowly with heavy breathing. Every inhale expands the ribcage visibly. Veins pulse subtly along his biceps and forearms.
@@ -226,7 +226,7 @@ Final shot: boxer exhales sharply — chest heaves, abs tighten and relax rhythm
 His abdominal muscles are visibly flexed and tense, showing natural skin compression and realistic muscle deformation. Skin stretches tightly over striated muscle fibers. High contrast lighting emphasizes anatomical detail and surface texture.
 Cinematic sports photography, ultra-realistic anatomy, high dynamic range lighting, shallow depth of field, 85mm lens look, film grain, dramatic shadows, sweat droplets glistening, extreme muscle definition, realistic skin elasticity, powerful athletic tension, 4k ultra-detailed, intense fight atmosphere.
 
-![paw-2](image-9.png)
+![paw-2](reference-images/image-9.png)
 
 A battered professional boxer sits in his corner between rounds inside a roaring arena. His face is bruised, one eye swelling, sweat and blood mixing under harsh overhead lights. The crowd behind him is a blur of blue stadium lights and motion.
 The scene begins tight on his face — heavy breathing, chest rising and falling. Sweat drips from his chin onto the canvas.
