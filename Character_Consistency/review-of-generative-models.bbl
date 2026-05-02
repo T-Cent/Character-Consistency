@@ -1,0 +1,131 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{10}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{} and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showURL}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showURL #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[Bao et~al\mbox{.}(2023)]%
+        {bao2023all}
+\bibfield{author}{\bibinfo{person}{Fan Bao}, \bibinfo{person}{Shen Nie}, \bibinfo{person}{Kaiwen Xue}, \bibinfo{person}{Yue Cao}, \bibinfo{person}{Chongxuan Li}, \bibinfo{person}{Hang Su}, {and} \bibinfo{person}{Jun Zhu}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{All are Worth Words: A ViT Backbone for Diffusion Models}. In \bibinfo{booktitle}{\emph{Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}}.
+\newblock
+
+
+\bibitem[DeepMind(2024)]%
+        {deepmind2024veo}
+\bibfield{author}{\bibinfo{person}{Google DeepMind}.} \bibinfo{year}{2024}\natexlab{}.
+\newblock \showarticletitle{Veo: A highly capable video generation model}.
+\newblock \bibinfo{journal}{\emph{Google DeepMind Technical Report}} (\bibinfo{year}{2024}).
+\newblock
+\urldef\tempurl%
+\url{https://deepmind.google/technologies/veo/}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Hacohen et~al\mbox{.}(2026)]%
+        {hacohen2026ltx}
+\bibfield{author}{\bibinfo{person}{Amit Hacohen} {et~al\mbox{.}}} \bibinfo{year}{2026}\natexlab{}.
+\newblock \showarticletitle{LTX-2: Efficient Joint Audio-Visual Foundation Model}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2601.03233}} (\bibinfo{year}{2026}).
+\newblock
+
+
+\bibitem[Kaswan et~al\mbox{.}(2023)]%
+        {kaswan2023generative}
+\bibfield{author}{\bibinfo{person}{Kuldeep~Singh Kaswan}, \bibinfo{person}{Jagjit~Singh Dhatterwal}, \bibinfo{person}{Kiran Malik}, {and} \bibinfo{person}{Anupam Baliyan}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{Generative AI: A review on Models and Applications}. In \bibinfo{booktitle}{\emph{2023 International Conference on Communication, Security and Artificial Intelligence (ICCSAI)}}. IEEE, \bibinfo{pages}{699--704}.
+\newblock
+\href{https://doi.org/10.1109/ICCSA159793.2023.10421601}{doi:\nolinkurl{10.1109/ICCSA159793.2023.10421601}}
+
+
+\bibitem[Team(2025)]%
+        {alibaba2025wan}
+\bibfield{author}{\bibinfo{person}{Alibaba~Qwen Team}.} \bibinfo{year}{2025}\natexlab{}.
+\newblock \showarticletitle{Wan 2.2: Scaling Spatio-Temporal Diffusion Transformers for High-Fidelity Video Synthesis}.
+\newblock \bibinfo{journal}{\emph{Alibaba Cloud AI Technical Reports}} (\bibinfo{year}{2025}).
+\newblock
+
+
+\bibitem[Team(2026)]%
+        {bytedance2025seedance}
+\bibfield{author}{\bibinfo{person}{ByteDance~Seed Team}.} \bibinfo{year}{2026}\natexlab{}.
+\newblock \showarticletitle{Seedance: Native Multi-Shot Storytelling in Video Generation}.
+\newblock \bibinfo{journal}{\emph{ByteDance Technical Report}} (\bibinfo{year}{2026}).
+\newblock
+\urldef\tempurl%
+\url{https://seed.bytedance.com/seedance}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Technology(2026)]%
+        {kuaishou2025kling}
+\bibfield{author}{\bibinfo{person}{Kuaishou Technology}.} \bibinfo{year}{2026}\natexlab{}.
+\newblock \showarticletitle{Kling 3.0: Unified Multimodal Video Generation with 3D Spacetime Joint Attention}.
+\newblock \bibinfo{journal}{\emph{Kuaishou AI Research Group}} (\bibinfo{year}{2026}).
+\newblock
+\urldef\tempurl%
+\url{https://kling.kuaishou.com/}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Technology(2024)]%
+        {shengshu2024vidu}
+\bibfield{author}{\bibinfo{person}{ShengShu Technology}.} \bibinfo{year}{2024}\natexlab{}.
+\newblock \showarticletitle{Vidu: Single-pass Text-to-Video Generation with U-ViT}.
+\newblock \bibinfo{journal}{\emph{ShengShu AI Research}} (\bibinfo{year}{2024}).
+\newblock
+
+
+\bibitem[xAI Engineering(2025)]%
+        {xai2025grok}
+\bibfield{author}{\bibinfo{person}{xAI Engineering}.} \bibinfo{year}{2025}\natexlab{}.
+\newblock \showarticletitle{The State of Grok AI: Hybrid Architectures and Compute Efficiencies on Colossus}.
+\newblock \bibinfo{journal}{\emph{xAI Research Updates}} (\bibinfo{year}{2025}).
+\newblock
+
+
+\bibitem[Xie et~al\mbox{.}(2025)]%
+        {xie2025comprehensive}
+\bibfield{author}{\bibinfo{person}{Fan Xie}, \bibinfo{person}{Dan Zeng}, \bibinfo{person}{Qiaomu Shen}, {and} \bibinfo{person}{Bo Tang}.} \bibinfo{year}{2025}\natexlab{}.
+\newblock \showarticletitle{A Comprehensive Survey on Text-to-Video Generation}.
+\newblock \bibinfo{journal}{\emph{Chinese Journal of Electronics}} \bibinfo{volume}{34}, \bibinfo{number}{4} (\bibinfo{year}{2025}), \bibinfo{pages}{1009--1036}.
+\newblock
+\href{https://doi.org/10.23919/cje.2024.00.151}{doi:\nolinkurl{10.23919/cje.2024.00.151}}
+
+
+\end{thebibliography}

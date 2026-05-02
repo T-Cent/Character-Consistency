@@ -1,0 +1,75 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: review-of-generative-models.aux
+The style file: ACM-Reference-Format.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: sample-base.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--empty publisher in bao2023all
+Warning--empty address in bao2023all
+Warning--page numbers missing in both pages and numpages fields in bao2023all
+Warning--no number and no volume in deepmind2024veo
+Warning--page numbers missing in both pages and numpages fields in deepmind2024veo
+Warning--no number and no volume in hacohen2026ltx
+Warning--page numbers missing in both pages and numpages fields in hacohen2026ltx
+Warning--empty publisher in kaswan2023generative
+Warning--empty address in kaswan2023generative
+Warning--no number and no volume in alibaba2025wan
+Warning--page numbers missing in both pages and numpages fields in alibaba2025wan
+Warning--no number and no volume in bytedance2025seedance
+Warning--page numbers missing in both pages and numpages fields in bytedance2025seedance
+Warning--no number and no volume in kuaishou2025kling
+Warning--page numbers missing in both pages and numpages fields in kuaishou2025kling
+Warning--no number and no volume in shengshu2024vidu
+Warning--page numbers missing in both pages and numpages fields in shengshu2024vidu
+Warning--no number and no volume in xai2025grok
+Warning--page numbers missing in both pages and numpages fields in xai2025grok
+You've used 10 entries,
+            6273 wiz_defined-function locations,
+            1724 strings with 21970 characters,
+and the built_in function-call counts, 10507 in all, are:
+= -- 1555
+> -- 274
+< -- 0
++ -- 87
+- -- 101
+* -- 650
+:= -- 944
+add.period$ -- 49
+call.type$ -- 10
+change.case$ -- 62
+chr.to.int$ -- 10
+cite$ -- 29
+duplicate$ -- 918
+empty$ -- 662
+format.name$ -- 113
+if$ -- 2739
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 42
+newline$ -- 131
+num.names$ -- 70
+pop$ -- 402
+preamble$ -- 1
+purify$ -- 142
+quote$ -- 0
+skip$ -- 290
+stack$ -- 0
+substring$ -- 659
+swap$ -- 60
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 188
+warning$ -- 19
+while$ -- 64
+width$ -- 0
+write$ -- 233
+(There were 19 warnings)
