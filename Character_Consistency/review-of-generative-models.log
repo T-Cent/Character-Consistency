@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.5.27)  1 MAY 2026 23:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.5.27)  2 MAY 2026 16:14
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2418,17 +2418,16 @@ LaTeX Warning: Reference `sec:wan22' on page 12 undefined on input line 748.
 
 LaTeX Warning: Reference `sec:ltx_t2v' on page 12 undefined on input line 772.
 
-
-
-[12.12]
 Missing character: There is no ¹ in font lmsy9!
 
-Overfull \hbox (7.43777pt too wide) in paragraph at lines 799--800
+Overfull \hbox (7.43777pt too wide) in paragraph at lines 783--784
 \T1/lmr/m/n/9 (-20) list): []$https : / / github . com / T -[] Cent / Character -[] Consistency$[] 
  []
 
 
-Overfull \hbox (9.61583pt too wide) in paragraph at lines 800--801
+
+[12.12]
+Overfull \hbox (9.61583pt too wide) in paragraph at lines 784--785
 \T1/lmr/m/n/9 (-20) 1cEVKn6BVKXk5Svhe4l1FFPjY2MZcX6lc ? usp = sharing$[] 
  []
 
@@ -2445,6 +2444,10 @@ Class acmart Warning: CCS concepts are mandatory for papers over two pages.
 
 
 
+
+
+
+Overfull \vbox (1.6625pt too high) has occurred while \output is active []
 
 
 Missing character: There is no ¹ in font lmsy10!
@@ -2465,18 +2468,18 @@ Package rerunfilecheck Info: File `review-of-generative-models.out' has not chan
 (rerunfilecheck)             Checksum: 26F0B8132C3C30159BF78CB232EC6EBE;5880.
  ) 
 Here is how much of TeX's memory you used:
- 42615 strings out of 469590
- 930990 string characters out of 5474513
+ 42605 strings out of 469590
+ 930908 string characters out of 5474513
  1510118 words of memory out of 5000000
  68067 multiletter control sequences out of 15000+600000
- 760852 words of font info for 309 fonts, out of 8000000 for 9000
+ 760650 words of font info for 307 fonts, out of 8000000 for 9000
  1302 hyphenation exceptions out of 8191
  99i,19n,131p,1409b,2343s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <d:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmb10.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr10.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr12.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr6.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr7.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr8.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr9.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri7.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri8.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri9.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmss8.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy9.pfb><d:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmtt9.pfb>
-Output written on review-of-generative-models.pdf (13 pages, 29032182 bytes).
+Output written on review-of-generative-models.pdf (13 pages, 29030385 bytes).
 PDF statistics:
- 476 PDF objects out of 1000 (max. 8388607)
- 390 compressed objects within 4 object streams
- 133 named destinations out of 1000 (max. 500000)
+ 469 PDF objects out of 1000 (max. 8388607)
+ 383 compressed objects within 4 object streams
+ 127 named destinations out of 1000 (max. 500000)
  66490 words of extra memory for PDF output out of 74296 (max. 10000000)
 
