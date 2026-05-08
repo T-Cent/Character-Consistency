@@ -1,0 +1,4 @@
+PWD D:/IIITD/Character-Consistency/Character_Consistency
+INPUT d:/texlive/2025/texmf.cnf
+INPUT d:/texlive/2025/texmf-dist/web2c/texmf.cnf
+INPUT d:/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt

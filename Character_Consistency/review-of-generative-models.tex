@@ -14,6 +14,7 @@
 \usepackage{hyperref} 
 \usepackage{booktabs} 
 \usepackage{float}
+\usepackage{enumitem}
 
 \usepackage{subcaption}
 
@@ -23,27 +24,27 @@
 \begin{document}
 
 \newcommand{\displayimages}[9]{
-    \begin{figure}[h]
+    \begin{figure}[H]
         \centering
 
-        \begin{subfigure}{0.49\columnwidth}
+        \begin{subfigure}{0.45\columnwidth}
             \includegraphics[width=\linewidth]{../generated-videos/API/frames/#1_0000#5_/#1_0000#5__02.jpg}
             \caption{#6}
         \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.49\columnwidth}
+        ~
+        \begin{subfigure}{0.45\columnwidth}
             \includegraphics[width=\linewidth]{../generated-videos/API/frames/#2_0000#5_/#2_0000#5__02.jpg}
             \caption{#7}
         \end{subfigure}
 
-        \vskip\baselineskip
+        \vfill
 
-        \begin{subfigure}{0.49\columnwidth}
+        \begin{subfigure}{0.45\columnwidth}
             \includegraphics[width=\linewidth]{../generated-videos/API/frames/#3_0000#5_/#3_0000#5__02.jpg}
             \caption{#8}
         \end{subfigure}
-        \hfill
-        \begin{subfigure}{0.49\columnwidth}
+        ~
+        \begin{subfigure}{0.45\columnwidth}
             \includegraphics[width=\linewidth]{../generated-videos/API/frames/#4_0000#5_/#4_0000#5__02.jpg}
             \caption{#9}
         \end{subfigure}
@@ -72,13 +73,18 @@
 
 \renewcommand{\shortauthors}{Mittal and Garg, et al.}
 
+\definecolor{color1}{RGB}{31, 119, 180}  % Steel Blue
+\definecolor{color2}{RGB}{174, 199, 232} % Light Blue
+\definecolor{color3}{RGB}{255, 127, 14}  % Safety Orange
+\definecolor{color4}{RGB}{255, 187, 120} % Light Orange
+
 \begin{abstract}
-    The rapid evolution of generative artificial intelligence has positioned video generation as the current frontier of creative machine learning models. Despite a recent burst of such architectures, there remains a notable absence of large-scale comparative studies analyzing their practical capabilities. This paper addresses this gap by first underpinning the general inner workings of video generative models, followed by a detailed examination of the unique functional mechanics of each model evaluated in this study. To systematically assess these systems, we introduce a curated list of targeted stress-testing prompts designed to rigorously judge the models' temporal coherence, spatial and physical reasoning, prompt inference accuracy, and animation style lineage. The detailed methodology and prompt list are described in Section~\ref{sec:targeted_and_stress_testing}. Ultimately, we comprehensively review the current state of both open-source and premium AI generative video models across a variety of use cases, explicitly testing their individual strengths and weaknesses to evaluate their viability in professional workflows. The complete generated dataset, facilitating further research and reproducibility, can be found on the authors' \href{https://www.github.com/T-Cent/Character-Consistency}{GitHub}.
+    The rapid evolution of generative artificial intelligence has positioned video generation as the current frontier of creative machine learning models. Despite a recent burst of such architectures, there remains a notable absence of large-scale comparative studies analyzing their practical capabilities. This paper addresses this gap by first underpinning the general inner workings of video generative models, followed by a detailed examination of the unique functional mechanics of each model evaluated in this study. To systematically assess these systems, we introduce a curated list of targeted stress-testing prompts designed to rigorously judge the models' temporal coherence, spatial and physical reasoning, prompt inference accuracy, and animation style lineage. Ultimately, we review the current state of both AI generative video models across a variety of use cases, explicitly testing their individual strengths and weaknesses to evaluate their viability in professional workflows. The dataset will be made public to facilitate future research.
 \end{abstract}
 
 \begin{teaserfigure}
     \centering
-    \includegraphics[height=15em]{images/image.png}
+    \includegraphics[height=15em]{images/image.png} ~ \includegraphics[height=15em]{image.png}
     \caption{Wild Robot (left: real; right: extended using Wan 2.2)}
 \end{teaserfigure}
 
@@ -86,29 +92,77 @@
 
 \section{Introduction}
 
-As is the current landscape of Generative AI, one can immediately go online and have an AI generate any video they want, given a text and/or an image, largely free of cost. The quality of such videos is usually not what the user originally had in mind, but the current state-of-the-art (SOTA) models have been able to provide videos of reasonably high quality. Additionally, there has been much development from the open-source community to ``catch-up'' to the quality provided by the closed-sourced competitors. The ability to generate complex temporal media through prompt engineering represents a massive shift in creative workflows, bringing rapid prototyping to cinematography. However, integrating these models into professional pipelines requires them to adhere strictly to human instructions and maintain physical and spatial consistency across generated frames.
+One can immediately go online and have an AI generate any video they want, given a text and/or an image, largely free of cost. The quality of such videos is usually not what the user originally had in mind, but the current state-of-the-art (SOTA) models have been able to provide videos of reasonably high quality. Additionally, there has been much development from the open-source community to ``catch-up'' to the quality provided by the closed-sourced competitors. The ability to generate complex temporal media through prompt engineering represents a massive shift in creative workflows, bringing rapid prototyping to cinematography. Open-source models such as Wan 2.2, Vidu \& LTX have far less compute to train on and relatively smaller corpus of dataset to train their models on, while proprietary models, such as Google's Veo \& OpenAI's SORA have significant resources. However, integrating these models into professional pipelines requires them to adhere strictly to human instructions and maintain physical and spatial consistency across generated frames. We analyze their adherence to said instructions and its ability to infer what the user wanted by a curated list of prompt, as described in Sec \ref{sec:targeted_and_stress_testing}.
 
-Despite impressive visual fidelity, current generative architectures face significant mechanical and spatial challenges. Models frequently struggle with object permanence and structural integrity; for instance, high-frequency details often exhibit slight 2.5D warping at macro scales rather than maintaining true 3D fabric persistence. Temporal consistency remains a major hurdle, as models often cannot maintain object permanence or texture stability during a simple vertical drop.
+
+Current SOTA models show impressive visual fidelity, but they face significant mechanical and spatial challenges. Models frequently struggle with object permanence and structural integrity; for instance, high-frequency details often exhibit slight 2.5D warping at macro scales rather than maintaining true 3D fabric persistence. Temporal consistency remains a major hurdle, as models often cannot maintain object permanence or texture stability during a simple vertical drop.
+
+\begin{figure}[h]
+    \includegraphics[width=0.7\columnwidth]{../generated-videos/API/frames/veo_00004_/veo_00004__03.jpg}
+    \caption{Google Veo 3}
+\end{figure}
 
 When tasked with simulating gravity or complex interactions, models can fail entirely, sometimes resulting in catastrophic physics failures. A prime example is ``object mitosis,'' where the model completely loses track of an object's geometry and mass, causing a single item (like a bouncing ball) to erroneously split into two. Even basic Newtonian physics, such as simulating elastic rebounds or kinetic energy transfer, can cause models to fail. In long-horizon coherence tests, instead of rendering continuous action, models frequently hallucinate new states or rely on severe jump cuts.
 
-To systematically evaluate these capabilities, we devised a strong set of prompts to judge various \emph{types} of video and how individual models perform at each such genre. We categorize these into metric-specific baselines, stylistic baselines, and advanced stress tests. Our evaluation covers a diverse array of SOTA models, specifically:
-\begin{enumerate}
-    \item Grok
-    \item Kling O3
-    \item LTX 2.6
-    \item Seedance 1.5
-    \item Veo
-    \item Vidu Q3
-    \item Wan 2.2 \footnote[1]{Run locally on a single 4080 SUPER}
-    \item LTX 2 \footnotemark[1]
-\end{enumerate}
+\begin{figure}[h]
+    \centering
 
-Our metric baselines isolate specific mechanical parameters. For example, the ``Red Cube'' prompt (Prompt~[1]) evaluates whether a primitive geometric shape can maintain its absolute structural and color integrity during continuous, smooth camera translation without morphing or flickering. The ``Rubber Ball'' prompt (Prompt~[2]) assesses the model's understanding of basic Newtonian physics, specifically gravity, elasticity, momentum preservation, and kinetic energy decay upon contact with a rigid surface. For advanced stress tests, we introduced scenarios like the ``Tea Sequence'' (Prompt~[6]) to evaluate logical narrative sequencing; it challenges the model to link distinct, sequential actions into a cohesive timeline without skipping steps or forgetting the initial context. Furthermore, we tested stylistic adherence, such as prompting for an anime-style cat (Prompt~[C]) to gauge the model's understanding of specific Japanese animation tropes, including distinct shading techniques, exaggerated proportions, and potential modulation of perceived frame rates.
+    \begin{subfigure}{0.45\columnwidth}
+        \includegraphics[width=\linewidth]{../generated-videos/API/frames/ltx-t2v_00002_/ltx-t2v_00002__01.jpg}
+    \end{subfigure}
+    ~
+    \begin{subfigure}{0.45\columnwidth}
+        \includegraphics[width=\linewidth]{../generated-videos/API/frames/ltx-t2v_00002_/ltx-t2v_00002__02.jpg}
+    \end{subfigure}
 
-In this paper, we review the current state of open-source and premium AI generative video models on a variety of use cases and test their strengths and weaknesses through various curated prompts. Crucially, other works never tested this many models and never on the breadth of testing criteria. We first give a high-level overview of how these models function in general, previously using Variational Autoencoders and Generative Adversarial Networks. We then describe Diffusion Transformers, the technology that powers the current SOTA models.
+    \vfill
 
-The accompanying GitHub repository can be found on the authors' \href{https://www.github.com/T-Cent/Character-Consistency}{GitHub}. The dataset can be found on \href{https://drive.google.com/drive/folders/1cEVKn6BVKXk5Svhe4l1FFPjY2MZcX6lc?usp=sharing}{Google Drive}, which also contains results of preliminary testing and exploration.
+    \begin{subfigure}{0.45\columnwidth}
+        \includegraphics[width=\linewidth]{../generated-videos/API/frames/ltx-t2v_00002_/ltx-t2v_00002__03.jpg}
+    \end{subfigure}
+    ~
+    \begin{subfigure}{0.45\columnwidth}
+        \includegraphics[width=\linewidth]{../generated-videos/API/frames/ltx-t2v_00002_/ltx-t2v_00002__04.jpg}
+    \end{subfigure}
+
+    \caption{LTX}
+\end{figure}
+
+After establishing the base properties of these models, we test their readiness in a production environment by asking it to extend a sequence given an image and a detailed prompt describing exactly what we want. As show in the teaser figure above, we gave Wan 2.2 (14B) a frame from Dreamwork's Wild Robot as a starting point and asked it to show Roz bending to touch the grass while the deer roamed freely:
+
+\begin{figure}[h]
+    \centering
+
+    \begin{subfigure}{0.45\columnwidth}
+        \includegraphics[width=\linewidth]{../generated-videos/dataset v2/wil1/wan22_i2v/frame_002.png}
+    \end{subfigure}
+    ~
+    \begin{subfigure}{0.45\columnwidth}
+        \includegraphics[width=\linewidth]{../generated-videos/dataset v2/wil1/wan22_i2v/frame_004.png}
+    \end{subfigure}
+
+    \vfill
+
+    \begin{subfigure}{0.45\columnwidth}
+        \includegraphics[width=\linewidth]{../generated-videos/dataset v2/wil1/wan22_i2v/frame_006.png}
+    \end{subfigure}
+    ~
+    \begin{subfigure}{0.45\columnwidth}
+        \includegraphics[width=\linewidth]{../generated-videos/dataset v2/wil1/wan22_i2v/frame_008.png}
+    \end{subfigure}
+
+    \caption{Wan 2.2's extension of Wild Robot}
+\end{figure}
+
+
+
+Our metric baselines isolate specific mechanical parameters. For example, the ``Red Cube'' prompt (\ref{prompt:1}) evaluates whether a primitive geometric shape can maintain its absolute structural and color integrity during continuous, smooth camera translation without morphing or flickering. The ``Rubber Ball'' prompt (\ref{prompt:2}) assesses the model's understanding of basic Newtonian physics, specifically gravity, elasticity, momentum preservation, and kinetic energy decay upon contact with a rigid surface. For advanced stress tests, we introduced scenarios like the ``Tea Sequence'' (\ref{prompt:6}) to evaluate logical narrative sequencing; it challenges the model to link distinct, sequential actions into a cohesive timeline without skipping steps or forgetting the initial context. Furthermore, we tested stylistic adherence, such as prompting for an anime-style cat (\ref{prompt:c}) to gauge the model's understanding of specific Japanese animation tropes, including distinct shading techniques, exaggerated proportions, and potential modulation of perceived frame rates.
+
+We then follow up on these results by presenting a discussion on the inner architecture of each model and comparing them against the result we obtained. This discussion is presented in Section~\ref{sec:architectures}. Additionally, Section~\ref{sec:background} describes video-generation techniques in general, including early approaches and the current state-of-the-art in content generation. Section~\ref{sec:targeted_and_stress_testing} covers our base prompts to evaluate each model on our individual parameters. Models tested include Grok, Kling O3, LTX 2.6, LTX 2.2, Seedance 1.5, Google Veo 3, Vidu Q3 and Wan 2.2; the list of prompts can be found in Appendix~\ref{app:prompts}. The parameters we judge on can be found in Appendix~\ref{app:parameters}. Said list can also be found on \href{https://t-cent.github.io/Character-Consistency}{the accompanying webpage}.
+
+To summarize, in this paper we review the current state of AI generative video models on a variety of use cases and test their strengths and weaknesses through various curated prompts. We devised a set of 13 rigorous evaluation benchmarks and prompts to judge a model on these benchmarks. We then evaluate its capabilities in a production environment.
+
+
 
 \section{Background and Related Work}
 \label{sec:background}
@@ -117,23 +171,42 @@ The landscape of Generative Artificial Intelligence (AI) for video synthesis has
 
 \subsection{Foundational Generative Architectures}
 Early approaches to text-to-video (T2V) generation relied predominantly on Variational Autoencoders (VAEs) and Generative Adversarial Networks (GANs) \cite{kaswan2023generative, xie2025comprehensive}.
-\begin{itemize}
-    \item \textbf{VAEs:} These models consist of an encoder that maps input data into a probability distribution and a decoder that generates new data by sampling from this learned distribution \cite{xie2025comprehensive}. While structurally simple, VAEs often suffer from ``posterior collapse'' and struggle to generate highly complex, high-resolution videos \cite{xie2025comprehensive}.
-    \item \textbf{GANs:} Generative Adversarial Networks operate via an adversarial process between a generator and a discriminator \cite{xie2025comprehensive}. While capable of producing images with good perceptual quality, GANs frequently suffer from pattern (mode) collapse and struggle to scale to complex, large-scale video datasets with diverse human movements \cite{xie2025comprehensive}.
-\end{itemize}
+\textbf{VAEs} consist of an encoder that maps input data into a probability distribution and a decoder that generates new data by sampling from this learned distribution \cite{xie2025comprehensive}. While structurally simple, VAEs often suffer from ``posterior collapse'' and struggle to generate highly complex, high-resolution videos \cite{xie2025comprehensive}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\columnwidth]{images/2026-05-08-17-47-40.png}
+    \caption{Variational Autoencoders\protect\footnotemark}
+\end{figure}
+
+\footnotetext{Image credit: \url{https://yanndubs.github.io/machine-learning-glossary/models/vae}}
+
+\textbf{GANs} operate via an adversarial process between a generator and a discriminator \cite{xie2025comprehensive}. While capable of producing images with good perceptual quality, GANs frequently suffer from pattern (mode) collapse and struggle to scale to complex, large-scale video datasets with diverse human movements \cite{xie2025comprehensive}.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\columnwidth]{images/2026-05-08-18-01-19.png}
+    \caption{Generative Adversarial Networks\protect\footnotemark}
+\end{figure}
+
+\footnotetext{Image credit: \url{https://machinelearningmastery.com/tour-of-generative-adversarial-network-models/}}
 
 To overcome these limitations, the field shifted toward \textbf{Autoregressive Transformers}. These models generate video sequences in a step-by-step manner, where the latest generated content is conditioned on previously generated frames \cite{xie2025comprehensive}. This natural fit for sequential data avoids GAN pattern collapse and yields higher video quality, albeit at the cost of massive computational and memory resources \cite{xie2025comprehensive}.
 
 \subsection{Under the Hood: Diffusion Models and DiT}
 The current generation of state-of-the-art commercial models (including the architectures powering Sora, Veo, Kling, and others evaluated in this paper) are predominantly built upon \textbf{Diffusion Models} and \textbf{Diffusion Transformers (DiT)}.
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.7\linewidth]{images/2026-05-08-18-07-51.png}
+    \caption{Diffusion models\protect\footnotemark}
+\end{figure}
+
+\footnotetext{Image credit: \url{https://lilianweng.github.io/posts/2021-07-11-diffusion-models/}}
+
 At its core, a Denoising Diffusion Probabilistic Model (DDPM) learns to synthesize data by first adding random Gaussian noise to existing data over a series of steps, and then training a neural network to reverse this process (denoising) to recover the high-quality image or video \cite{xie2025comprehensive}. Because operating directly in pixel space is computationally prohibitive for video, modern models utilize \textbf{Latent Diffusion}. In this approach, an encoder maps the video into a highly compressed latent representation, the diffusion process occurs within this smaller latent space, and a decoder reconstructs the final video pixels, significantly reducing computational consumption \cite{xie2025comprehensive}.
 
-Recently, the traditional U-Net backbones used in diffusion models have been replaced by Transformers, creating the \textbf{Diffusion Transformer (DiT)} architecture \cite{xie2025comprehensive}. Models utilizing DiT (such as OpenAI's Sora) exhibit several advanced capabilities under the hood:
-\begin{enumerate}
-    \item \textbf{Variable Resolution Training:} They can be trained natively on videos and images of varying resolutions, durations, and aspect ratios without extreme cropping \cite{xie2025comprehensive}.
-    \item \textbf{Prompt Expansion:} They leverage Large Language Models (LLMs) to automatically convert short, vague user prompts into highly detailed instructions, drastically improving the semantic alignment and quality of the generated video \cite{xie2025comprehensive}.
-\end{enumerate}
+Recently, the traditional U-Net backbones used in diffusion models have been replaced by Transformers, creating the \textbf{Diffusion Transformer (DiT)} architecture \cite{xie2025comprehensive}. Models utilizing DiT (such as OpenAI's Sora) exhibit several advanced capabilities under the hood, such as \textbf{Variable Resolution Training} which can be trained natively on videos and images of varying resolutions, durations, and aspect ratios without extreme cropping \cite{xie2025comprehensive} and \textbf{Prompt Expansion} which leverages Large Language Models (LLMs) to automatically convert short, vague user prompts into highly detailed instructions, drastically improving the semantic alignment and quality of the generated video \cite{xie2025comprehensive}.
 
 \subsection{The Necessity of Stress Testing}
 Traditionally, T2V models are evaluated using automated quantitative metrics such as Fr\'{e}chet Video Distance (FVD) and Inception Score (IS) for visual quality, alongside CLIPSIM for text-video semantic alignment \cite{xie2025comprehensive}.
@@ -142,133 +215,87 @@ However, recent studies indicate that these automated evaluation metrics often m
 
 \section{Targeted Prompts and Stress Testing Methodology}
 \label{sec:targeted_and_stress_testing}
-To isolate specific failure modes and evaluate foundational capabilities, we utilize a set of targeted prompts designed to test exactly one domain at a time.
-This provides a neutral baseline before introducing complex, multi-layered scenarios. We categorize these into metric-specific baselines, stylistic baselines, and advanced stress tests.
+To isolate specific failure modes and evaluate foundational capabilities, we utilize our set of targeted prompts designed to test specific domains as listed in Appendix~\ref{app:parameters}.
+This provides a neutral baseline before introducing complex, multi-layered scenarios as mentioned in Appendix~\ref{app:prompts_i2v} and Appendix~\ref{app:prompts_t2v}.
 
 \subsection{Dataset Creation}
 
-We briefly describe our generation pipeline and prompts used.
+We briefly describe our generation pipeline and prompts used. ComfyUI on a Windows machine using a single NVIDIA 4080 SUPER was used for generation of all videos. In each of the following section, we first describe how our prompts achieves its baseline test and we then display randomly sampled frames from four such generated videos. Additional material may be viewed from the complete dataset.
 
-To facilitate locally run models, we set up ComfyUI on a Windows machine using an NVIDIA 4080 Super and an Intel i7 chip. We then devised three ``categories'' of prompts:
-\begin{enumerate}
-    \item Testing/baseline prompts: they are extremely simple and direct prompts, testing exactly one thing, such as \begin{enumerate}
-              \item Temporal consistency
-              \item Spatial awareness
-              \item Physical interactions
-              \item And more\ldots
-          \end{enumerate}
-    \item Animation styles: to judge what type of videos a particular model can create, we categorized these into:
-          \begin{enumerate}
-              \item cartoon
-              \item anime (exaggerated animation)
-              \item realistic
-              \item hyper-realistic
-              \item educational
-          \end{enumerate}
-    \item Creative prompts: actual, real-world prompts and use cases
-          \begin{enumerate}
-              \item extending a video
-              \item generating a video from an image
-              \item a complex video from text
-          \end{enumerate}
-\end{enumerate}
 
 \subsection{Targeted Prompts: Metric Baselines}
-These prompts isolate individual mechanical, spatial, or temporal capabilities of the video generation models.
 
-\begin{itemize}
-    \item \textbf{Prompt [1]:} ``A single red cube sits on a white table in a well-lit room. The camera slowly moves in a small circle around the cube. The cube does not change shape, size, or color at any point.''
-          \\ \textbf{Testing:} Temporal consistency [1].
-          \\ \textbf{How:} Evaluates whether a primitive geometric shape can maintain its absolute structural and color integrity during continuous, smooth camera translation without morphing or flickering.
+ 
 
-          \displayimages{Grok}{kling_o3_t2v}{ltx-t2v}{seedance}{1}{Grok}{Kling}{LTX}{Seedance}
+\ref{prompt:1} (red cube) testing temporal consistency \ref{param:1}. Evaluates whether a primitive geometric shape can maintain its absolute structural and color integrity during continuous, smooth camera translation without morphing or flickering.
+
+\displayimages{Grok}{kling_o3_t2v}{ltx-t2v}{seedance}{1}{Grok}{Kling}{LTX}{Seedance}
 
 
-    \item \textbf{Prompt [2]:} ``A blue rubber ball is dropped from a height onto a flat concrete floor. The ball bounces several times, with each bounce reaching a lower height than the previous one, following realistic motion.''
-          \\ \textbf{Testing:} Motion realism [2], Object interaction \& physics reasoning [7].
-          \\ \textbf{How:} Assesses the model's understanding of basic Newtonian physics, specifically gravity, elasticity, momentum preservation, and kinetic energy decay upon contact with a rigid surface.
+\ref{prompt:2} (rubber ball) testing motion realism \ref{param:2}, objection interaction \& physics reasoning \ref{param:7}. Assesses the model's understanding of basic Newtonian physics, specifically gravity, elasticity, momentum preservation, and kinetic energy decay upon contact with a rigid surface.
 
-          \displayimages{veo}{kling_o3_t2v}{ltx-t2v}{seedance}{2}{Google Veo}{Kling}{LTX}{Seedance}
+\displayimages{veo}{kling_o3_t2v}{ltx-t2v}{seedance}{2}{Google Veo}{Kling}{LTX}{Seedance}
 
 
-    \item \textbf{Prompt [3]:} ``A stationary wooden chair is placed in the center of a room. The camera performs a smooth forward dolly movement toward the chair without shaking or sudden jumps.''
-          \\ \textbf{Testing:} Camera behavior [3].
-          \\ \textbf{How:} Isolates virtual camera operation to determine if the model can execute a clean spatial translation (a dolly in) without inducing artificial camera shake, spatial warping, or dropped frames.
+\ref{prompt:3} (wooden chair) testing camera behavior \ref{param:3}. Evaluates whether the model can execute a stable and physically plausible forward dolly movement without introducing camera shake, spatial distortion, temporal jitter, or discontinuities in perspective projection.
 
-    \item \textbf{Prompt [4]:} ``A white sphere is placed on a flat surface under a single fixed overhead light source. The camera remains still. The lighting and shadows remain consistent throughout the scene.''
-          \\ \textbf{Testing:} Lighting stability [4].
-          \\ \textbf{How:} Tests the rendering engine's ability to hold a static lighting state, ensuring that the gradient shading on the sphere and the cast shadow on the surface do not swim or shift over time.
-
-    \item \textbf{Prompt [5]:} ``A person wearing a plain green shirt and black pants walks in a straight line across a neutral background. Their appearance, clothing, and body proportions remain consistent throughout the video.''
-          \\ \textbf{Testing:} Character preservation [5].
-          \\ \textbf{How:} A fundamental locomotion test checking if human anatomy, limb proportions, and specific clothing colors remain stable during a repetitive biomechanical cycle (walking).
-
-    \item \textbf{Prompt [6]:} ``A person enters a room, walks to a table, picks up a cup, and takes a sip. The sequence of actions should be clear and logically ordered.''
-          \\ \textbf{Testing:} Prompt inference and context [6], Long-horizon coherence [10].
-          \\ \textbf{How:} Evaluates logical narrative sequencing. It challenges the model to link distinct, sequential actions into a cohesive timeline without skipping steps or forgetting the initial context.
-
-          \displayimages{vidu_q3_t2v}{veo}{ltx-t2v}{seedance}{3}{Vidu}{Google Veo}{LTX}{Seedance}
+\displayimages{Grok}{kling_o3_t2v}{ltx-t2v}{seedance}{3}{Grok}{Kling}{LTX}{Seedance}
 
 
-    \item \textbf{Prompt [7]:} ``A hand pushes a glass across a table. The glass slides, slows down due to friction, and stops.''
-          \\ \textbf{Testing:} Object interaction \& physics reasoning [7].
-          \\ \textbf{How:} Tests the transfer of kinetic force from an organic subject to a rigid object, and evaluates the model's simulation of friction and gradual deceleration.
-
-    \item \textbf{Prompt [8]:} ``Three identical spheres (red, blue, and green) roll forward at the same speed across a flat surface without changing color or size.''
-          \\ \textbf{Testing:} Multi-agent coordination [8], Temporal consistency [1].
-          \\ \textbf{How:} Evaluates the ability to independently track multiple distinct entities moving in parallel. It tests whether the model suffers from color bleeding, merging, or varied acceleration between identical shapes.
-
-    \item \textbf{Prompt [9]:} ``A person walks behind a large box and then reappears on the other side. Their appearance remains consistent.''
-          \\ \textbf{Testing:} Spatial reasoning \& geometry [12], Character preservation [5].
-          \\ \textbf{How:} A strict test of object permanence and occlusion handling. It determines if the model retains character identity and spatial trajectory while the subject is entirely hidden from the camera's view.
-
-    \item \textbf{Prompt [10]:} ``A person wearing a shirt with thin horizontal stripes stands still while the camera slowly zooms in. The stripe pattern remains stable.''
-          \\ \textbf{Testing:} Fine-grained detail consistency [9], Camera behavior [3].
-          \\ \textbf{How:} Challenges the model with high-frequency textures during scaling. It evaluates resistance to aliasing, moir\'{e} patterns, and texture ``swimming'' as focal length changes.
-
-          \displayimages{Grok}{kling_o3_t2v}{ltx-t2v}{seedance}{4}{Grok}{Kling}{LTX}{Seedance}
+\ref{prompt:4} (white sphere) testing lighting stability \ref{param:4}. Assesses whether illumination, surface shading gradients, and cast shadows remain temporally coherent under static scene conditions without flickering, drifting, or inconsistent light transport artifacts.
 
 
-    \item \textbf{Prompt [11]:} ``A cube is placed in front of a sphere. The camera moves sideways, clearly showing that the cube remains closer to the camera than the sphere.''
-          \\ \textbf{Testing:} Spatial reasoning \& geometry [12].
-          \\ \textbf{How:} Tests depth perception and parallax rendering, ensuring the model understands 3D spatial layout and relative object positioning during lateral camera movements.
+\ref{prompt:5} (green shirt) testing character preservation \ref{param:5}. Evaluates whether anatomical structure, clothing appearance, body proportions, and identity-specific visual features remain temporally stable throughout continuous locomotion without morphing or feature drift.
 
-    \item \textbf{Prompt [12]:} ``A sign with the text `OPEN' is placed on a wall. The camera slowly moves closer while the text remains clear and readable.''
-          \\ \textbf{Testing:} Text rendering [13].
-          \\ \textbf{How:} Evaluates typographic stability. It tests if alphabetical characters maintain their structural geometry and legibility without morphing into unreadable symbols during camera motion.
-\end{itemize}
+
+\ref{prompt:6} (cup of tea) testing prompt inference and context \ref{param:6}, long-horizon coherence \ref{param:10}. Assesses the model's ability to maintain causal narrative sequencing across multiple sequential actions while preserving contextual memory and temporal continuity over an extended action chain.
+
+\displayimages{vidu_q3_t2v}{veo}{ltx-t2v}{seedance}{3}{Vidu}{Google Veo}{LTX}{Seedance}
+
+
+\ref{prompt:7} (glass slide) testing object interaction \& physics reasoning \ref{param:7}. Evaluates whether the model correctly simulates force transfer, frictional deceleration, inertial motion, and contact dynamics between an articulated agent and a rigid body object.
+
+
+\ref{prompt:8} (red, green, blue) testing multi-agent coordination \ref{param:8}, temporal consistency \ref{param:1}. Assesses the ability to independently preserve identity, motion synchronization, and spatial separation across multiple simultaneously moving entities without merging, color bleeding, or inconsistent velocity behavior.
+
+
+\ref{prompt:9} (large box) testing spatial reasoning \& geometry \ref{param:12}, character preservation \ref{param:5}. Evaluates object permanence, occlusion reasoning, and trajectory continuity by determining whether the model preserves subject identity and spatial consistency while the character is temporarily hidden from view.
+
+
+\ref{prompt:10} (striped shirt) testing fine-grained detail consistency \ref{param:9}, camera behavior \ref{param:3}. Assesses whether high-frequency texture details remain stable during continuous zoom motion without introducing aliasing, texture swimming, moir\'{e} artifacts, or geometric distortion.
+
+\displayimages{Grok}{kling_o3_t2v}{ltx-t2v}{seedance}{4}{Grok}{Kling}{LTX}{Seedance}
+
+
+\ref{prompt:11} (cube and sphere) testing spatial reasoning \& geometry \ref{param:12}. Evaluates whether the model preserves correct depth relationships, parallax behavior, and relative object positioning during lateral camera translation in a 3D spatial configuration.
+
+
+\ref{prompt:12} (OPEN) testing text rendering \ref{param:13}. Assesses whether typographic structures remain geometrically stable and semantically legible during camera motion without character deformation, symbol substitution, or temporal instability in fine textual details.
 
 \subsection{Targeted Prompts: Animation Styles}
-These prompts utilize identical actions to isolate and evaluate the model's ability to adhere strictly to specified visual aesthetics and rendering techniques.
 
-\begin{itemize}
-    \item \textbf{Prompt [A]:} ``A cat walks from left to right across a room.''
-          \\ \textbf{Testing:} Base style generation [A].
-          \\ \textbf{How:} Establishes the model's default, unprompted output baseline for lighting, texture, and motion prior to any stylistic constraints.
+\ref{prompt:a} (base cat walk). Establishes the model's default visual prior by evaluating its unprompted choices for lighting, texture fidelity, scene composition, and motion representation in the absence of explicit stylistic conditioning.
 
-    \item \textbf{Prompt [B]:} ``A cartoon-style cat walks from left to right across a room. The shapes are simple and stylized, with clean outlines.''
-          \\ \textbf{Testing:} Cartoon and stylized [B].
-          \\ \textbf{How:} Evaluates adherence to traditional 2D/3D western animation aesthetics, checking for flat shading, simplified geometry, and deliberate line work.
-
-          \displayimages{Grok}{kling_o3_t2v}{ltx-t2v}{seedance}{5}{Grok}{Kling}{LTX}{Seedance}
+\displayimages{Grok}{kling_o3_t2v}{ltx-t2v}{seedance}{5}{Grok}{Kling}{LTX}{Seedance}
 
 
-    \item \textbf{Prompt [C]:} ``An anime-style cat walks from left to right across a room. The design uses exaggerated stylization typical of anime.''
-          \\ \textbf{Testing:} Anime [C].
-          \\ \textbf{How:} Tests the model's understanding of specific Japanese animation tropes, including distinct shading techniques, exaggerated proportions, and potential modulation of perceived frame rates.
+\ref{prompt:b} (cartoon-style cat). Assesses adherence to stylized western animation aesthetics, including simplified geometry, controlled shape language, clean contour definition, reduced material realism, and intentionally abstracted motion behavior.
 
-    \item \textbf{Prompt [D]:} ``A realistic cat walks from left to right across a room. The scene uses natural lighting and believable textures.''
-          \\ \textbf{Testing:} Realistic/cinematic [D].
-          \\ \textbf{How:} Checks for accurate organic texture generation (fur), believable lighting environments, and true-to-life biomechanical motion.
+\displayimages{Grok}{kling_o3_t2v}{ltx-t2v}{seedance}{7}{Grok}{Kling}{LTX}{Seedance}
 
-    \item \textbf{Prompt [E]:} ``A highly detailed, photo-realistic cat walks from left to right across a room. The lighting, textures, and motion appear lifelike.''
-          \\ \textbf{Testing:} Hyper-realistic/photo-real [E].
-          \\ \textbf{How:} Pushes the realistic baseline to its limits, testing micro-details, complex light scattering, and absolute fidelity to real-world camera sensors.
 
-    \item \textbf{Prompt [F]:} ``A simple educational-style animation shows a cat walking from left to right across a room, clearly illustrating the motion.''
-          \\ \textbf{Testing:} Educational [F].
-          \\ \textbf{How:} Assesses the ability to abstract visual information for clarity, potentially utilizing diagrammatic layouts or highlighted motion paths typical of instructional media.
-\end{itemize}
+\ref{prompt:c} (anime-style cat). Evaluates the model's understanding of anime-specific visual conventions such as exaggerated proportions, cel-shading behavior, stylized facial structure, limited-animation aesthetics, and temporally coherent stylized motion.
+
+
+\ref{prompt:d} (realistic cat). Assesses the ability to synthesize believable organic textures, physically plausible lighting, natural environmental shading, and realistic quadrupedal locomotion consistent with cinematic rendering conventions.
+
+
+\ref{prompt:e} (photo-realistic cat). Evaluates high-fidelity rendering capability through micro-texture preservation, advanced material realism, complex indirect lighting behavior, realistic fur dynamics, and image statistics closely matching physical camera capture.
+
+\displayimages{Grok}{kling_o3_t2v}{ltx-t2v}{seedance}{6}{Grok}{Kling}{LTX}{Seedance}
+
+
+\ref{prompt:f} (educational-style animation). Assesses whether the model can intentionally simplify visual presentation for instructional clarity while preserving semantic readability, motion intelligibility, and diagrammatic communication structure typical of educational media.
 
 \subsection{Stress Testing Prompts}
 These prompts combine multiple domains, testing the absolute limits of the model's coherence over extended durations and complex interactions.
@@ -296,25 +323,55 @@ The bar charts below summarize our quantitative scores across the evaluated prom
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}
+
         \begin{axis}[
-                ybar=2pt,
-                bar width=0.15cm,
+                ybar=0pt, % Removes gap between bars in the same group
+                bar width=7pt,
                 width=\columnwidth,
-                height=0.28\textheight,
-                symbolic x coords={Veo,Kling,LTX,Vidu,Seedance,Grok},
+                height=0.35\textheight, % Increased height for better legibility
+                symbolic x coords={Veo, Kling, LTX, Vidu, Seedance, Grok},
                 xtick=data,
-                nodes near coords,
+                ymin=0, ymax=6,
                 ylabel={Score},
                 xlabel={Model},
                 title={Evaluation Scores for Prompt [1] (Red Cube)},
-                legend style={at={(0.5,-0.15)},anchor=north},
-                legend columns=2,
-                ymin=0, ymax=6
+                % Grid and Axis Style
+                ymajorgrids=true,
+                grid style={dashed, gray!30},
+                axis line style={gray!60},
+                % Legend Style
+                legend style={
+                        at={(0.5,-0.2)},
+                        anchor=north,
+                        legend columns=2,
+                        draw=none, % Remove border
+                        /tikz/every even column/.append style={column sep=10pt}
+                    },
+                % Label Styles
+                nodes near coords,
+                every node near coord/.append style={font=\tiny, inner sep=2pt},
+                label style={font=\small},
+                tick label style={font=\small},
+                title style={font=\bfseries\small, yshift=2pt},
+                enlarge x limits=0.15,
             ]
-            \addplot[fill=blue] coordinates {(Veo,5) (Kling,5) (LTX,2) (Vidu,5) (Seedance,3) (Grok,5)};
-            \addplot[fill=red, bar shift=0.2cm] coordinates {(Veo,4) (Kling,4) (LTX,3) (Vidu,1) (Seedance,1) (Grok,1)};
-            \addplot[fill=green, bar shift=0.4cm] coordinates {(Veo,4) (Kling,4) (LTX,3) (Vidu,2) (Seedance,2) (Grok,2)};
-            \addplot[fill=yellow, bar shift=0.6cm] coordinates {(Veo,5) (Kling,5) (LTX,2) (Vidu,4) (Seedance,3) (Grok,4)};
+
+            \addplot[fill=color1, draw=none] coordinates {
+                    (Veo,5) (Kling,5) (LTX,2) (Vidu,5) (Seedance,3) (Grok,5)
+                };
+
+            \addplot[fill=color2, draw=none] coordinates {
+                    (Veo,4) (Kling,4) (LTX,3) (Vidu,1) (Seedance,1) (Grok,1)
+                };
+
+            \addplot[fill=color3, draw=none] coordinates {
+                    (Veo,4) (Kling,4) (LTX,3) (Vidu,2) (Seedance,2) (Grok,2)
+                };
+
+            \addplot[fill=color4, draw=none] coordinates {
+                    (Veo,5) (Kling,5) (LTX,2) (Vidu,4) (Seedance,3) (Grok,4)
+                };
+
             \legend{Temporal Consistency, Camera Behavior, Prompt Inference, Spatial Geometry}
         \end{axis}
     \end{tikzpicture}
@@ -327,23 +384,36 @@ The bar charts below summarize our quantitative scores across the evaluated prom
     \centering
     \begin{tikzpicture}
         \begin{axis}[
-                ybar=2pt,
-                bar width=0.15cm,
+                ybar=0pt,
+                bar width=7pt,
                 width=\columnwidth,
-                height=0.28\textheight,
+                height=0.35\textheight,
                 symbolic x coords={Veo,Kling,Vidu,Grok,Seedance,LTX},
                 xtick=data,
-                nodes near coords,
+                ymin=0, ymax=6,
                 ylabel={Score},
                 xlabel={Model},
                 title={Evaluation Scores for Prompt [2] (Rubber Ball)},
-                legend style={at={(0.5,-0.15)},anchor=north},
-                legend columns=2,
-                ymin=0, ymax=6
+                ymajorgrids=true,
+                grid style={dashed, gray!30},
+                axis line style={gray!60},
+                legend style={
+                        at={(0.5,-0.2)},
+                        anchor=north,
+                        legend columns=2,
+                        draw=none,
+                        /tikz/every even column/.append style={column sep=10pt}
+                    },
+                nodes near coords,
+                every node near coord/.append style={font=\tiny, inner sep=2pt},
+                label style={font=\small},
+                tick label style={font=\small},
+                title style={font=\bfseries\small, yshift=2pt},
+                enlarge x limits=0.15,
             ]
-            \addplot[fill=blue] coordinates {(Veo,1) (Kling,5) (Vidu,3) (Grok,2) (Seedance,1) (LTX,1)};
-            \addplot[fill=red, bar shift=0.2cm] coordinates {(Veo,1) (Kling,4) (Vidu,3) (Grok,2) (Seedance,1) (LTX,1)};
-            \addplot[fill=green, bar shift=0.4cm] coordinates {(Veo,2) (Kling,4) (Vidu,4) (Grok,2) (Seedance,2) (LTX,2)};
+            \addplot[fill=color1, draw=none] coordinates {(Veo,1) (Kling,5) (Vidu,3) (Grok,2) (Seedance,1) (LTX,1)};
+            \addplot[fill=color2, draw=none] coordinates {(Veo,1) (Kling,4) (Vidu,3) (Grok,2) (Seedance,1) (LTX,1)};
+            \addplot[fill=color3, draw=none] coordinates {(Veo,2) (Kling,4) (Vidu,4) (Grok,2) (Seedance,2) (LTX,2)};
             \legend{Motion Realism, Object Interaction, Prompt Inference}
         \end{axis}
     \end{tikzpicture}
@@ -356,24 +426,37 @@ The bar charts below summarize our quantitative scores across the evaluated prom
     \centering
     \begin{tikzpicture}
         \begin{axis}[
-                ybar=2pt,
-                bar width=0.15cm,
+                ybar=0pt,
+                bar width=7pt,
                 width=\columnwidth,
-                height=0.28\textheight,
+                height=0.35\textheight,
                 symbolic x coords={Kling,Veo,Vidu,Grok,Seedance,LTX},
                 xtick=data,
-                nodes near coords,
+                ymin=0, ymax=6,
                 ylabel={Score},
                 xlabel={Model},
                 title={Evaluation Scores for Prompt [6] (The Tea Sequence)},
-                legend style={at={(0.5,-0.15)},anchor=north},
-                legend columns=2,
-                ymin=0, ymax=6
+                ymajorgrids=true,
+                grid style={dashed, gray!30},
+                axis line style={gray!60},
+                legend style={
+                        at={(0.5,-0.2)},
+                        anchor=north,
+                        legend columns=2,
+                        draw=none,
+                        /tikz/every even column/.append style={column sep=10pt}
+                    },
+                nodes near coords,
+                every node near coord/.append style={font=\tiny, inner sep=2pt},
+                label style={font=\small},
+                tick label style={font=\small},
+                title style={font=\bfseries\small, yshift=2pt},
+                enlarge x limits=0.15,
             ]
-            \addplot[fill=blue] coordinates {(Kling,5) (Veo,5) (Vidu,5) (Grok,5) (Seedance,5) (LTX,3)};
-            \addplot[fill=red, bar shift=0.2cm] coordinates {(Kling,5) (Veo,3) (Vidu,4) (Grok,4) (Seedance,4) (LTX,2)};
-            \addplot[fill=green, bar shift=0.4cm] coordinates {(Kling,5) (Veo,5) (Vidu,4) (Grok,4) (Seedance,3) (LTX,1)};
-            \addplot[fill=yellow, bar shift=0.6cm] coordinates {(Kling,5) (Veo,5) (Vidu,3) (Grok,3) (Seedance,3) (LTX,1)};
+            \addplot[fill=color1, draw=none] coordinates {(Kling,5) (Veo,5) (Vidu,5) (Grok,5) (Seedance,5) (LTX,3)};
+            \addplot[fill=color2, draw=none] coordinates {(Kling,5) (Veo,3) (Vidu,4) (Grok,4) (Seedance,4) (LTX,2)};
+            \addplot[fill=color3, draw=none] coordinates {(Kling,5) (Veo,5) (Vidu,4) (Grok,4) (Seedance,3) (LTX,1)};
+            \addplot[fill=color4, draw=none] coordinates {(Kling,5) (Veo,5) (Vidu,3) (Grok,3) (Seedance,3) (LTX,1)};
             \legend{Character Preservation, Prompt Inference, Long-Horizon Coherence, Object Interaction}
         \end{axis}
     \end{tikzpicture}
@@ -386,23 +469,36 @@ The bar charts below summarize our quantitative scores across the evaluated prom
     \centering
     \begin{tikzpicture}
         \begin{axis}[
-                ybar=2pt,
-                bar width=0.15cm,
+                ybar=0pt,
+                bar width=7pt,
                 width=\columnwidth,
-                height=0.28\textheight,
+                height=0.35\textheight,
                 symbolic x coords={Kling,Grok,Vidu,LTX,Veo,Seedance},
                 xtick=data,
-                nodes near coords,
+                ymin=0, ymax=6,
                 ylabel={Score},
                 xlabel={Model},
                 title={Evaluation Scores for Prompt [10] (The Stripe Zoom)},
-                legend style={at={(0.5,-0.15)},anchor=north},
-                legend columns=2,
-                ymin=0, ymax=6
+                ymajorgrids=true,
+                grid style={dashed, gray!30},
+                axis line style={gray!60},
+                legend style={
+                        at={(0.5,-0.2)},
+                        anchor=north,
+                        legend columns=2,
+                        draw=none,
+                        /tikz/every even column/.append style={column sep=10pt}
+                    },
+                nodes near coords,
+                every node near coord/.append style={font=\tiny, inner sep=2pt},
+                label style={font=\small},
+                tick label style={font=\small},
+                title style={font=\bfseries\small, yshift=2pt},
+                enlarge x limits=0.15,
             ]
-            \addplot[fill=blue] coordinates {(Kling,5) (Grok,5) (Vidu,5) (LTX,3) (Veo,1) (Seedance,3)};
-            \addplot[fill=red, bar shift=0.2cm] coordinates {(Kling,4) (Grok,4) (Vidu,4) (LTX,3) (Veo,4) (Seedance,1)};
-            \addplot[fill=green, bar shift=0.4cm] coordinates {(Kling,4) (Grok,4) (Vidu,3) (LTX,3) (Veo,4) (Seedance,2)};
+            \addplot[fill=color1, draw=none] coordinates {(Kling,5) (Grok,5) (Vidu,5) (LTX,3) (Veo,1) (Seedance,3)};
+            \addplot[fill=color2, draw=none] coordinates {(Kling,4) (Grok,4) (Vidu,4) (LTX,3) (Veo,4) (Seedance,1)};
+            \addplot[fill=color3, draw=none] coordinates {(Kling,4) (Grok,4) (Vidu,3) (LTX,3) (Veo,4) (Seedance,2)};
             \legend{Fine-Grained Detail, Camera Behavior, Prompt Inference}
         \end{axis}
     \end{tikzpicture}
@@ -415,23 +511,36 @@ The bar charts below summarize our quantitative scores across the evaluated prom
     \centering
     \begin{tikzpicture}
         \begin{axis}[
-                ybar=2pt,
-                bar width=0.15cm,
+                ybar=0pt,
+                bar width=7pt,
                 width=\columnwidth,
-                height=0.28\textheight,
+                height=0.35\textheight,
                 symbolic x coords={Kling,Seedance,Vidu,Veo,Grok,LTX},
                 xtick=data,
-                nodes near coords,
+                ymin=0, ymax=6,
                 ylabel={Score},
                 xlabel={Model},
                 title={Evaluation Scores for Prompt [B] (Cartoon Cat)},
-                legend style={at={(0.5,-0.15)},anchor=north},
-                legend columns=2,
-                ymin=0, ymax=6
+                ymajorgrids=true,
+                grid style={dashed, gray!30},
+                axis line style={gray!60},
+                legend style={
+                        at={(0.5,-0.2)},
+                        anchor=north,
+                        legend columns=2,
+                        draw=none,
+                        /tikz/every even column/.append style={column sep=10pt}
+                    },
+                nodes near coords,
+                every node near coord/.append style={font=\tiny, inner sep=2pt},
+                label style={font=\small},
+                tick label style={font=\small},
+                title style={font=\bfseries\small, yshift=2pt},
+                enlarge x limits=0.15,
             ]
-            \addplot[fill=blue] coordinates {(Kling,5) (Seedance,4) (Vidu,4) (Veo,3) (Grok,4) (LTX,4)};
-            \addplot[fill=red, bar shift=0.2cm] coordinates {(Kling,4) (Seedance,4) (Vidu,2) (Veo,5) (Grok,3) (LTX,1)};
-            \addplot[fill=green, bar shift=0.4cm] coordinates {(Kling,5) (Seedance,5) (Vidu,5) (Veo,5) (Grok,1) (LTX,3)};
+            \addplot[fill=color1, draw=none] coordinates {(Kling,5) (Seedance,4) (Vidu,4) (Veo,3) (Grok,4) (LTX,4)};
+            \addplot[fill=color2, draw=none] coordinates {(Kling,4) (Seedance,4) (Vidu,2) (Veo,5) (Grok,3) (LTX,1)};
+            \addplot[fill=color3, draw=none] coordinates {(Kling,5) (Seedance,5) (Vidu,5) (Veo,5) (Grok,1) (LTX,3)};
             \legend{Stylistic Adherence, Motion Realism, Character Preservation}
         \end{axis}
     \end{tikzpicture}
@@ -444,23 +553,36 @@ The bar charts below summarize our quantitative scores across the evaluated prom
     \centering
     \begin{tikzpicture}
         \begin{axis}[
-                ybar=2pt,
-                bar width=0.15cm,
+                ybar=0pt,
+                bar width=7pt,
                 width=\columnwidth,
-                height=0.28\textheight,
+                height=0.35\textheight,
                 symbolic x coords={Veo,Kling,Grok,Seedance,Vidu,LTX},
                 xtick=data,
-                nodes near coords,
+                ymin=0, ymax=6,
                 ylabel={Score},
                 xlabel={Model},
                 title={Evaluation Scores for Prompt [D/E] (Realistic Cat Walk Cycle)},
-                legend style={at={(0.5,-0.15)},anchor=north},
-                legend columns=2,
-                ymin=0, ymax=6
+                ymajorgrids=true,
+                grid style={dashed, gray!30},
+                axis line style={gray!60},
+                legend style={
+                        at={(0.5,-0.2)},
+                        anchor=north,
+                        legend columns=2,
+                        draw=none,
+                        /tikz/every even column/.append style={column sep=10pt}
+                    },
+                nodes near coords,
+                every node near coord/.append style={font=\tiny, inner sep=2pt},
+                label style={font=\small},
+                tick label style={font=\small},
+                title style={font=\bfseries\small, yshift=2pt},
+                enlarge x limits=0.15,
             ]
-            \addplot[fill=blue] coordinates {(Veo,5) (Kling,5) (Grok,5) (Seedance,4) (Vidu,4) (LTX,4)};
-            \addplot[fill=red, bar shift=0.2cm] coordinates {(Veo,5) (Kling,4) (Grok,3) (Seedance,3) (Vidu,3) (LTX,1)};
-            \addplot[fill=green, bar shift=0.4cm] coordinates {(Veo,5) (Kling,5) (Grok,4) (Seedance,4) (Vidu,4) (LTX,2)};
+            \addplot[fill=color1, draw=none] coordinates {(Veo,5) (Kling,5) (Grok,5) (Seedance,4) (Vidu,4) (LTX,4)};
+            \addplot[fill=color2, draw=none] coordinates {(Veo,5) (Kling,4) (Grok,3) (Seedance,3) (Vidu,3) (LTX,1)};
+            \addplot[fill=color3, draw=none] coordinates {(Veo,5) (Kling,5) (Grok,4) (Seedance,4) (Vidu,4) (LTX,2)};
             \legend{Stylistic Adherence, Motion Realism, Character Preservation}
         \end{axis}
     \end{tikzpicture}
@@ -473,23 +595,36 @@ The bar charts below summarize our quantitative scores across the evaluated prom
     \centering
     \begin{tikzpicture}
         \begin{axis}[
-                ybar=2pt,
-                bar width=0.15cm,
+                ybar=0pt,
+                bar width=7pt,
                 width=\columnwidth,
-                height=0.28\textheight,
+                height=0.35\textheight,
                 symbolic x coords={Kling,Grok,Veo,Vidu,Seedance,LTX},
                 xtick=data,
-                nodes near coords,
+                ymin=0, ymax=6,
                 ylabel={Score},
                 xlabel={Model},
                 title={Evaluation Scores for Prompt [C] (Anime Cat)},
-                legend style={at={(0.5,-0.15)},anchor=north},
-                legend columns=2,
-                ymin=0, ymax=6
+                ymajorgrids=true,
+                grid style={dashed, gray!30},
+                axis line style={gray!60},
+                legend style={
+                        at={(0.5,-0.2)},
+                        anchor=north,
+                        legend columns=2,
+                        draw=none,
+                        /tikz/every even column/.append style={column sep=10pt}
+                    },
+                nodes near coords,
+                every node near coord/.append style={font=\tiny, inner sep=2pt},
+                label style={font=\small},
+                tick label style={font=\small},
+                title style={font=\bfseries\small, yshift=2pt},
+                enlarge x limits=0.15,
             ]
-            \addplot[fill=blue] coordinates {(Kling,5) (Grok,5) (Veo,1) (Vidu,3) (Seedance,3) (LTX,1)};
-            \addplot[fill=red, bar shift=0.2cm] coordinates {(Kling,5) (Grok,3) (Veo,5) (Vidu,3) (Seedance,3) (LTX,1)};
-            \addplot[fill=green, bar shift=0.4cm] coordinates {(Kling,5) (Grok,5) (Veo,5) (Vidu,4) (Seedance,4) (LTX,3)};
+            \addplot[fill=color1, draw=none] coordinates {(Kling,5) (Grok,5) (Veo,1) (Vidu,3) (Seedance,3) (LTX,1)};
+            \addplot[fill=color2, draw=none] coordinates {(Kling,5) (Grok,3) (Veo,5) (Vidu,3) (Seedance,3) (LTX,1)};
+            \addplot[fill=color3, draw=none] coordinates {(Kling,5) (Grok,5) (Veo,5) (Vidu,4) (Seedance,4) (LTX,3)};
             \legend{Stylistic Adherence, Motion Realism, Character Preservation}
         \end{axis}
     \end{tikzpicture}
@@ -602,150 +737,88 @@ One challenging aspect is maintaining the length of his nose and his non-human e
 
 \appendix
 
-% -----------------------------------------------------------------------
-\section{Model Evaluation Tables}
-\label{app:eval_tables}
-
-The following tables provide full qualitative commentary for each prompt tested. Each row corresponds to one model; columns correspond to the specific capability dimensions being assessed. Scores in Section~\ref{sec:evaluation_tables} are derived from these observations on a 1--5 scale: \textbf{1}~=~Failed, \textbf{2}~=~Poor, \textbf{3}~=~Moderate, \textbf{4}~=~Good, \textbf{5}~=~Excellent.
-
-\subsection*{Prompt [1] (Red Cube)}
-\begin{table}[H]
-    \centering
-    \footnotesize
-    \renewcommand{\arraystretch}{1.2}
-    \begin{tabularx}{\columnwidth}{| l | X | X | X | X | X |}
-        \hline
-        \textbf{Model} & \textbf{[1] Temporal} & \textbf{[3] Camera} & \textbf{[6] Inference} & \textbf{[12] Spatial} & \textbf{Notes} \\ \hline
-        Veo      & \textbf{5} — Stable & \textbf{4} — Smooth orbit & \textbf{4} — Partial circle & \textbf{5} — Correct shadows & Most cinematic \\ \hline
-        Kling    & \textbf{5} — Stable & \textbf{4} — Clean orbit & \textbf{4} — Partial circle & \textbf{5} — Flawless & Smaller cube; flawless tracking \\ \hline
-        LTX      & \textbf{2} — Warps & \textbf{3} — Artificial & \textbf{3} — Shape drifts & \textbf{2} — 2.5D skew & Geometry distorts on lateral move \\ \hline
-        Vidu     & \textbf{5} — Stable & \textbf{1} — Push-in only & \textbf{2} — Wrong motion & \textbf{4} — Good static & Defaulted to zoom; ignored orbit \\ \hline
-        Seedance & \textbf{3} — Striations & \textbf{1} — Static & \textbf{2} — Failed + extras & \textbf{3} — Unprompted light & Hallucinated sweeping light beam \\ \hline
-        Grok     & \textbf{5} — Stable & \textbf{1} — Static & \textbf{2} — No motion & \textbf{4} — Good static & Behaves like image generator \\ \hline
-    \end{tabularx}
-    \caption{Prompt [1] — Red Cube}
-    \label{tab:app_eval_prompt_1}
-\end{table}
-
-\subsection*{Prompt [2] (Rubber Ball)}
-\begin{table}[H]
-    \centering
-    \footnotesize
-    \renewcommand{\arraystretch}{1.2}
-    \begin{tabularx}{\columnwidth}{| l | X | X | X | X |}
-        \hline
-        \textbf{Model} & \textbf{[2] Motion} & \textbf{[7] Physics} & \textbf{[6] Inference} & \textbf{Notes} \\ \hline
-        Kling    & \textbf{5} — Blur, accel. & \textbf{4} — Rebounds & \textbf{4} — Correct & Best physics; realistic deceleration \\ \hline
-        Vidu     & \textbf{3} — Uniform fall & \textbf{3} — Linear decay & \textbf{4} — Correct & Floaty; concept understood \\ \hline
-        Veo      & \textbf{1} — Moon gravity & \textbf{1} — Tennis ball & \textbf{2} — Wrong mat. & Hallucinates tennis ball; too slow \\ \hline
-        Grok     & \textbf{2} — No accel. & \textbf{2} — Drop \& stop & \textbf{2} — No bounces & No energy transfer simulated \\ \hline
-        Seedance & \textbf{1} — Teleports in & \textbf{1} — Text on ball & \textbf{2} — Halluc. text & ``G200'' text appears on surface \\ \hline
-        LTX      & \textbf{1} — Disjointed & \textbf{1} — Ball splits & \textbf{1} — Object mitosis & Ball splits into two mid-bounce \\ \hline
-    \end{tabularx}
-    \caption{Prompt [2] — Rubber Ball}
-    \label{tab:app_eval_prompt_2}
-\end{table}
-
-\subsection*{Prompt [6] (Tea Sequence)}
-\begin{table}[H]
-    \centering
-    \footnotesize
-    \renewcommand{\arraystretch}{1.2}
-    \begin{tabularx}{\columnwidth}{| l | X | X | X | X | X |}
-        \hline
-        \textbf{Model} & \textbf{[5] Char.} & \textbf{[6] Inference} & \textbf{[10] Coherence} & \textbf{[7] Physics} & \textbf{Notes} \\ \hline
-        Kling    & \textbf{5} & \textbf{5} — All 4 beats & \textbf{5} — Continuous & \textbf{5} — Natural gait & Best overall; full sequence \\ \hline
-        Veo      & \textbf{5} & \textbf{3} — Skips entry & \textbf{5} — Stable env. & \textbf{5} — Realistic & Starts mid-scene; cheats step 1 \\ \hline
-        Vidu     & \textbf{5} & \textbf{4} — 4 beats & \textbf{4} — Stable & \textbf{3} — Awkward & Sinks awkwardly to reach cup \\ \hline
-        Grok     & \textbf{5} & \textbf{4} — Logical & \textbf{4} — Good & \textbf{3} — Robotic & Stiff, floaty walk animation \\ \hline
-        Seedance & \textbf{5} & \textbf{4} — Follows & \textbf{3} — Cup materializes & \textbf{3} — Foot slide & Cup appears from nowhere \\ \hline
-        LTX      & \textbf{3} & \textbf{2} — Misses cup & \textbf{1} — Jump cut & \textbf{1} — Cup teleports & Classic long-horizon failure \\ \hline
-    \end{tabularx}
-    \caption{Prompt [6] — Tea Sequence}
-    \label{tab:app_eval_prompt_3}
-\end{table}
-
-\subsection*{Prompt [10] (Stripe Zoom)}
-\begin{table}[H]
-    \centering
-    \footnotesize
-    \renewcommand{\arraystretch}{1.2}
-    \begin{tabularx}{\columnwidth}{| l | X | X | X | X |}
-        \hline
-        \textbf{Model} & \textbf{[9] Detail} & \textbf{[3] Camera} & \textbf{[6] Inference} & \textbf{Notes} \\ \hline
-        Kling    & \textbf{5} — Locked & \textbf{4} — Smooth & \textbf{4} — Correct & Stripes map to 3D folds \\ \hline
-        Grok     & \textbf{5} — Stable & \textbf{4} — Smooth & \textbf{4} — Correct & Strong despite Prompt~[1] failure \\ \hline
-        Vidu     & \textbf{5} — Stable & \textbf{4} — Smooth & \textbf{3} — Thick stripes & Generated thick stripes (easier) \\ \hline
-        LTX      & \textbf{3} — Edge warp & \textbf{3} — Too tight & \textbf{3} — No context & 2.5D warp at macro scale \\ \hline
-        Veo      & \textbf{1} — Mesh collapse & \textbf{4} — Smooth & \textbf{4} — Good framing & Pattern breaks down at 00:04 \\ \hline
-        Seedance & \textbf{3} — Simple & \textbf{1} — Static & \textbf{2} — No zoom & Ignored camera motion entirely \\ \hline
-    \end{tabularx}
-    \caption{Prompt [10] — Stripe Zoom}
-    \label{tab:app_eval_prompt_4}
-\end{table}
-
-\subsection*{Prompt [B] (Cartoon Cat)}
-\begin{table}[H]
-    \centering
-    \footnotesize
-    \renewcommand{\arraystretch}{1.2}
-    \begin{tabularx}{\columnwidth}{| l | X | X | X | X |}
-        \hline
-        \textbf{Model} & \textbf{[B] Style} & \textbf{[2] Motion} & \textbf{[5] Char.} & \textbf{Notes} \\ \hline
-        Kling    & \textbf{5} — Cel 2D & \textbf{4} — Weight & \textbf{5} — Stable & Best overall; clean outlines + physics \\ \hline
-        Seedance & \textbf{4} — 2D outlines & \textbf{4} — Bouncy & \textbf{5} — Stable & BG slightly 3D vs.\ flat cat \\ \hline
-        Vidu     & \textbf{4} — Thick outlines & \textbf{2} — Slides & \textbf{5} — Stable & Flash-style rig; no knee bend \\ \hline
-        Veo      & \textbf{3} — 3D CGI & \textbf{5} — Flawless & \textbf{5} — Stable & Ignored 2D constraint; showed off 3D \\ \hline
-        Grok     & \textbf{4} — Vector 2D & \textbf{3} — Disjointed & \textbf{1} — Tail detaches & Limbs melt into background \\ \hline
-        LTX      & \textbf{4} — Minimalist & \textbf{1} — Glides & \textbf{3} — Legs shift & No quadruped biomechanics \\ \hline
-    \end{tabularx}
-    \caption{Prompt [B] — Cartoon Cat}
-    \label{tab:app_eval_prompt_5}
-\end{table}
-
-\subsection*{Prompt [D/E] (Realistic Cat)}
-\begin{table}[H]
-    \centering
-    \footnotesize
-    \renewcommand{\arraystretch}{1.2}
-    \begin{tabularx}{\columnwidth}{| l | X | X | X | X |}
-        \hline
-        \textbf{Model} & \textbf{[D/E] Style} & \textbf{[2] Motion} & \textbf{[5] Char.} & \textbf{Notes} \\ \hline
-        Veo      & \textbf{5} — Cinematic & \textbf{5} — Fluid & \textbf{5} — Stable & Industry-leading; dust motes, fur \\ \hline
-        Kling    & \textbf{5} — Maine Coon & \textbf{4} — Natural & \textbf{5} — Stable & Less secondary anim than Veo \\ \hline
-        Grok     & \textbf{5} — Sharp & \textbf{3} — Paw slide & \textbf{4} — Holds & Moonwalk; no floor contact \\ \hline
-        Seedance & \textbf{4} — Bengal & \textbf{3} — Rigid & \textbf{4} — Stable & Solid but lacks fluidity \\ \hline
-        Vidu     & \textbf{4} — Believable & \textbf{3} — Stiff & \textbf{4} — On model & Game-animation quality \\ \hline
-        LTX      & \textbf{4} — Photorealistic & \textbf{1} — Legs tangle & \textbf{2} — Limbs warp & No skeleton understanding \\ \hline
-    \end{tabularx}
-    \caption{Prompt [D/E] — Realistic Cat Walk Cycle}
-    \label{tab:app_eval_prompt_6}
-\end{table}
-
-\subsection*{Prompt [C] (Anime Cat)}
-\begin{table}[H]
-    \centering
-    \footnotesize
-    \renewcommand{\arraystretch}{1.2}
-    \begin{tabularx}{\columnwidth}{| l | X | X | X | X |}
-        \hline
-        \textbf{Model} & \textbf{[C] Style} & \textbf{[2] Motion} & \textbf{[5] Char.} & \textbf{Notes} \\ \hline
-        Kling    & \textbf{5} — Shinkai & \textbf{5} — Fluid 2D & \textbf{5} — Stable & Best: aesthetic + physics + direction \\ \hline
-        Grok     & \textbf{5} — Retro SoL & \textbf{3} — Stiff & \textbf{5} — Stable & Hallucinates hearts \& meowing \\ \hline
-        Veo      & \textbf{1} — 3D CGI & \textbf{5} — Flawless & \textbf{5} — Stable & Pixar look; ignored 2D medium \\ \hline
-        Vidu     & \textbf{3} — Generic & \textbf{3} — Rigid & \textbf{4} — On model & Cartoon/anime hybrid \\ \hline
-        Seedance & \textbf{3} — Borderline & \textbf{3} — Paw slide & \textbf{4} — Stable & Lacks stylistic confidence \\ \hline
-        LTX      & \textbf{1} — Vector & \textbf{1} — Scissors & \textbf{3} — Distorts & Fails style and physics \\ \hline
-    \end{tabularx}
-    \caption{Prompt [C] — Anime Cat}
-    \label{tab:app_eval_prompt_7}
-\end{table}
 
 % -----------------------------------------------------------------------
-\section{Detailed Prompts}
+\section{Prompts}
 \label{app:prompts}
 
-This appendix lists the exact verbatim prompts submitted to each model during evaluation, organized by generation modality. Prompts~[1]--[12] and~[A]--[F] are already described in full in Section~\ref{sec:targeted_and_stress_testing}; those below are the creative and real-world prompts used in Sections~\ref{sec:ltx_t2v} and~\ref{sec:wan22}.
+This appendix lists the exact verbatim prompts submitted to each model during evaluation, organized by generation modality.
+
+\subsection{Baseline Prompts}
+\label{app:baseline_prompts}
+
+Below mentioned prompts are explained in detail in what they test in Section~\ref{sec:targeted_and_stress_testing}.
+
+\subsubsection{Mechanical}
+
+\begin{enumerate}[label=\textbf{Prompt [\arabic*]}, leftmargin=*]
+
+    \item \label{prompt:1}
+          \textbf{(Red Cube)}
+          A single red cube sits on a white table in a well-lit room. The camera slowly moves in a small circle around the cube. The cube does not change shape, size, or color at any point.
+
+    \item \label{prompt:2}
+          \textbf{(Rubber Ball)}
+          A blue rubber ball is dropped from a height onto a flat concrete floor. The ball bounces several times, with each bounce reaching a lower height than the previous one, following realistic motion.
+
+    \item \label{prompt:3}
+          \textbf{(Wooden Chair)}
+          A stationary wooden chair is placed in the center of a room. The camera performs a smooth forward dolly movement toward the chair without shaking or sudden jumps.
+
+    \item \label{prompt:4}
+          \textbf{(White Sphere)}
+          A white sphere is placed on a flat surface under a single fixed overhead light source. The camera remains still. The lighting and shadows remain consistent throughout the scene.
+
+    \item \label{prompt:5}
+          \textbf{(Green Shirt)} A person wearing a plain green shirt and black pants walks in a straight line across a neutral background. Their appearance, clothing, and body proportions remain consistent throughout the video.
+
+    \item \label{prompt:6}
+          \textbf{(Cup of Tea)} A person enters a room, walks to a table, picks up a cup, and takes a sip. The sequence of actions should be clear and logically ordered.
+
+    \item \label{prompt:7}
+          \textbf{(Glass Slide)} A hand pushes a glass across a table. The glass slides, slows down due to friction, and stops.
+
+    \item \label{prompt:8}
+          \textbf{(Red, Green, Blue)} Three identical spheres (red, blue, and green) roll forward at the same speed across a flat surface without changing color or size.
+
+    \item \label{prompt:9}
+          \textbf{(Large Box)}  A person walks behind a large box and then reappears on the other side. Their appearance remains consistent.
+
+    \item \label{prompt:10}
+          \textbf{(Striped Shirt)} A person wearing a shirt with thin horizontal stripes stands still while the camera slowly zooms in. The stripe pattern remains stable.
+
+    \item \label{prompt:11}
+          \textbf{(Cube and Sphere)} A cube is placed in front of a sphere. The camera moves sideways, clearly showing that the cube remains closer to the camera than the sphere.
+
+    \item \label{prompt:12}
+          \textbf{(OPEN)} A sign with the text “OPEN” is placed on a wall. The camera slowly moves closer while the text remains clear and readable.
+
+\end{enumerate}
+
+
+\subsubsection{Artstyle}
+
+\begin{enumerate}[label=\textbf{Prompt [\Alph*]}, leftmargin=*]
+
+    \item \label{prompt:a}
+          \textbf{(Base)} A cat walks from left to right across a room.
+
+    \item \label{prompt:b}
+          \textbf{(Cartoon)}  A cartoon-style cat walks from left to right across a room. The shapes are simple and stylized, with clean outlines.
+
+    \item \label{prompt:c}
+          \textbf{(Anime)} An anime-style cat walks from left to right across a room. The design uses exaggerated stylization typical of anime.
+
+    \item \label{prompt:d}
+          \textbf{(Realistic)} A realistic cat walks from left to right across a room. The scene uses natural lighting and believable textures.
+
+    \item \label{prompt:e}
+          \textbf{(Hyper-realistic)} A highly detailed, photo-realistic cat walks from left to right across a room. The lighting, textures, and motion appear lifelike.
+
+    \item \label{prompt:f}
+          \textbf{(Educational)} A simple educational-style animation shows a cat walking from left to right across a room, clearly illustrating the motion.
+
+\end{enumerate}
 
 \subsection{Part 1: Image-to-Video Generation}
 \label{app:prompts_i2v}
@@ -773,7 +846,184 @@ The following prompts were submitted as pure text to all models. They represent 
 
 \textbf{Prompt 1:} Something Something
 
-\textbf{Prompt 2:} 
+\textbf{Prompt 2:}
+
+\section{Parameters}
+\label{app:parameters}
+
+
+We devised the following 13 baseline parameters to grade the resultant video generated by prompting a model.
+
+\begin{enumerate}[label=\textbf{[\arabic*]}, leftmargin=*]
+
+    \item \label{param:1}Temporal consistency (consistency across frames)
+
+    \item \label{param:2}Motion realism (accurate physical motion)
+
+    \item \label{param:3}Camera behavior (realistic/believable camera motion)
+
+    \item \label{param:4}Lighting stability (accurate light and shadows)
+
+    \item \label{param:5}Character preservation (definition/shape/body of a character is preserved throughout)
+
+    \item \label{param:6}Prompt inference and context (how well it understands the prompt and fills in the details)
+
+    \item \label{param:7}Object interaction \& physics reasoning (contact, force, collisions, deformation)
+
+    \item \label{param:8}Multi-agent coordination (multiple entities interacting consistently over time)
+
+    \item \label{param:9}Fine-grained detail consistency (text, patterns, small features staying stable)
+
+    \item \label{param:10}Long-horizon coherence (same scene evolving over longer duration (10--30s))
+
+    \item \label{param:11}Editing / controllability (can the model follow specific constraints)
+
+    \item \label{param:12}Spatial reasoning \& geometry (perspective correctness, occlusion, relative positioning)
+
+    \item \label{param:13}Text rendering (signs, labels, readable content)
+
+\end{enumerate}
+
+
+% -----------------------------------------------------------------------
+\section{Model Evaluation Tables}
+\label{app:eval_tables}
+
+The following tables provide full qualitative commentary for each prompt tested. Each row corresponds to one model; columns correspond to the specific capability dimensions being assessed. Scores in Section~\ref{sec:evaluation_tables} are derived from these observations on a 1--5 scale: \textbf{1}~=~Failed, \textbf{2}~=~Poor, \textbf{3}~=~Moderate, \textbf{4}~=~Good, \textbf{5}~=~Excellent.
+
+\subsection*{Prompt [1] (Red Cube)}
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabularx}{\columnwidth}{| l | X | X | X | X | X |}
+        \hline
+        \textbf{Model} & \textbf{[1] Temporal}   & \textbf{[3] Camera}       & \textbf{[6] Inference}       & \textbf{[12] Spatial}         & \textbf{Notes}                    \\ \hline
+        Veo            & \textbf{5} — Stable     & \textbf{4} — Smooth orbit & \textbf{4} — Partial circle  & \textbf{5} — Correct shadows  & Most cinematic                    \\ \hline
+        Kling          & \textbf{5} — Stable     & \textbf{4} — Clean orbit  & \textbf{4} — Partial circle  & \textbf{5} — Flawless         & Smaller cube; flawless tracking   \\ \hline
+        LTX            & \textbf{2} — Warps      & \textbf{3} — Artificial   & \textbf{3} — Shape drifts    & \textbf{2} — 2.5D skew        & Geometry distorts on lateral move \\ \hline
+        Vidu           & \textbf{5} — Stable     & \textbf{1} — Push-in only & \textbf{2} — Wrong motion    & \textbf{4} — Good static      & Defaulted to zoom; ignored orbit  \\ \hline
+        Seedance       & \textbf{3} — Striations & \textbf{1} — Static       & \textbf{2} — Failed + extras & \textbf{3} — Unprompted light & Hallucinated sweeping light beam  \\ \hline
+        Grok           & \textbf{5} — Stable     & \textbf{1} — Static       & \textbf{2} — No motion       & \textbf{4} — Good static      & Behaves like image generator      \\ \hline
+    \end{tabularx}
+    \caption{Prompt [1] — Red Cube}
+    \label{tab:app_eval_prompt_1}
+\end{table}
+
+\subsection*{Prompt [2] (Rubber Ball)}
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabularx}{\columnwidth}{| l | X | X | X | X |}
+        \hline
+        \textbf{Model} & \textbf{[2] Motion}       & \textbf{[7] Physics}      & \textbf{[6] Inference}      & \textbf{Notes}                       \\ \hline
+        Kling          & \textbf{5} — Blur, accel. & \textbf{4} — Rebounds     & \textbf{4} — Correct        & Best physics; realistic deceleration \\ \hline
+        Vidu           & \textbf{3} — Uniform fall & \textbf{3} — Linear decay & \textbf{4} — Correct        & Floaty; concept understood           \\ \hline
+        Veo            & \textbf{1} — Moon gravity & \textbf{1} — Tennis ball  & \textbf{2} — Wrong mat.     & Hallucinates tennis ball; too slow   \\ \hline
+        Grok           & \textbf{2} — No accel.    & \textbf{2} — Drop \& stop & \textbf{2} — No bounces     & No energy transfer simulated         \\ \hline
+        Seedance       & \textbf{1} — Teleports in & \textbf{1} — Text on ball & \textbf{2} — Halluc. text   & ``G200'' text appears on surface     \\ \hline
+        LTX            & \textbf{1} — Disjointed   & \textbf{1} — Ball splits  & \textbf{1} — Object mitosis & Ball splits into two mid-bounce      \\ \hline
+    \end{tabularx}
+    \caption{Prompt [2] — Rubber Ball}
+    \label{tab:app_eval_prompt_2}
+\end{table}
+
+\subsection*{Prompt [6] (Tea Sequence)}
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabularx}{\columnwidth}{| l | X | X | X | X | X |}
+        \hline
+        \textbf{Model} & \textbf{[5] Char.} & \textbf{[6] Inference}   & \textbf{[10] Coherence}       & \textbf{[7] Physics}       & \textbf{Notes}                  \\ \hline
+        Kling          & \textbf{5}         & \textbf{5} — All 4 beats & \textbf{5} — Continuous       & \textbf{5} — Natural gait  & Best overall; full sequence     \\ \hline
+        Veo            & \textbf{5}         & \textbf{3} — Skips entry & \textbf{5} — Stable env.      & \textbf{5} — Realistic     & Starts mid-scene; cheats step 1 \\ \hline
+        Vidu           & \textbf{5}         & \textbf{4} — 4 beats     & \textbf{4} — Stable           & \textbf{3} — Awkward       & Sinks awkwardly to reach cup    \\ \hline
+        Grok           & \textbf{5}         & \textbf{4} — Logical     & \textbf{4} — Good             & \textbf{3} — Robotic       & Stiff, floaty walk animation    \\ \hline
+        Seedance       & \textbf{5}         & \textbf{4} — Follows     & \textbf{3} — Cup materializes & \textbf{3} — Foot slide    & Cup appears from nowhere        \\ \hline
+        LTX            & \textbf{3}         & \textbf{2} — Misses cup  & \textbf{1} — Jump cut         & \textbf{1} — Cup teleports & Classic long-horizon failure    \\ \hline
+    \end{tabularx}
+    \caption{Prompt [6] — Tea Sequence}
+    \label{tab:app_eval_prompt_3}
+\end{table}
+
+\subsection*{Prompt [10] (Stripe Zoom)}
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabularx}{\columnwidth}{| l | X | X | X | X |}
+        \hline
+        \textbf{Model} & \textbf{[9] Detail}        & \textbf{[3] Camera}    & \textbf{[6] Inference}     & \textbf{Notes}                    \\ \hline
+        Kling          & \textbf{5} — Locked        & \textbf{4} — Smooth    & \textbf{4} — Correct       & Stripes map to 3D folds           \\ \hline
+        Grok           & \textbf{5} — Stable        & \textbf{4} — Smooth    & \textbf{4} — Correct       & Strong despite Prompt~[1] failure \\ \hline
+        Vidu           & \textbf{5} — Stable        & \textbf{4} — Smooth    & \textbf{3} — Thick stripes & Generated thick stripes (easier)  \\ \hline
+        LTX            & \textbf{3} — Edge warp     & \textbf{3} — Too tight & \textbf{3} — No context    & 2.5D warp at macro scale          \\ \hline
+        Veo            & \textbf{1} — Mesh collapse & \textbf{4} — Smooth    & \textbf{4} — Good framing  & Pattern breaks down at 00:04      \\ \hline
+        Seedance       & \textbf{3} — Simple        & \textbf{1} — Static    & \textbf{2} — No zoom       & Ignored camera motion entirely    \\ \hline
+    \end{tabularx}
+    \caption{Prompt [10] — Stripe Zoom}
+    \label{tab:app_eval_prompt_4}
+\end{table}
+
+\subsection*{Prompt [B] (Cartoon Cat)}
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabularx}{\columnwidth}{| l | X | X | X | X |}
+        \hline
+        \textbf{Model} & \textbf{[B] Style}          & \textbf{[2] Motion}     & \textbf{[5] Char.}         & \textbf{Notes}                         \\ \hline
+        Kling          & \textbf{5} — Cel 2D         & \textbf{4} — Weight     & \textbf{5} — Stable        & Best overall; clean outlines + physics \\ \hline
+        Seedance       & \textbf{4} — 2D outlines    & \textbf{4} — Bouncy     & \textbf{5} — Stable        & BG slightly 3D vs.\ flat cat           \\ \hline
+        Vidu           & \textbf{4} — Thick outlines & \textbf{2} — Slides     & \textbf{5} — Stable        & Flash-style rig; no knee bend          \\ \hline
+        Veo            & \textbf{3} — 3D CGI         & \textbf{5} — Flawless   & \textbf{5} — Stable        & Ignored 2D constraint; showed off 3D   \\ \hline
+        Grok           & \textbf{4} — Vector 2D      & \textbf{3} — Disjointed & \textbf{1} — Tail detaches & Limbs melt into background             \\ \hline
+        LTX            & \textbf{4} — Minimalist     & \textbf{1} — Glides     & \textbf{3} — Legs shift    & No quadruped biomechanics              \\ \hline
+    \end{tabularx}
+    \caption{Prompt [B] — Cartoon Cat}
+    \label{tab:app_eval_prompt_5}
+\end{table}
+
+\subsection*{Prompt [D/E] (Realistic Cat)}
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabularx}{\columnwidth}{| l | X | X | X | X |}
+        \hline
+        \textbf{Model} & \textbf{[D/E] Style}        & \textbf{[2] Motion}      & \textbf{[5] Char.}      & \textbf{Notes}                    \\ \hline
+        Veo            & \textbf{5} — Cinematic      & \textbf{5} — Fluid       & \textbf{5} — Stable     & Industry-leading; dust motes, fur \\ \hline
+        Kling          & \textbf{5} — Maine Coon     & \textbf{4} — Natural     & \textbf{5} — Stable     & Less secondary anim than Veo      \\ \hline
+        Grok           & \textbf{5} — Sharp          & \textbf{3} — Paw slide   & \textbf{4} — Holds      & Moonwalk; no floor contact        \\ \hline
+        Seedance       & \textbf{4} — Bengal         & \textbf{3} — Rigid       & \textbf{4} — Stable     & Solid but lacks fluidity          \\ \hline
+        Vidu           & \textbf{4} — Believable     & \textbf{3} — Stiff       & \textbf{4} — On model   & Game-animation quality            \\ \hline
+        LTX            & \textbf{4} — Photorealistic & \textbf{1} — Legs tangle & \textbf{2} — Limbs warp & No skeleton understanding         \\ \hline
+    \end{tabularx}
+    \caption{Prompt [D/E] — Realistic Cat Walk Cycle}
+    \label{tab:app_eval_prompt_6}
+\end{table}
+
+\subsection*{Prompt [C] (Anime Cat)}
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabularx}{\columnwidth}{| l | X | X | X | X |}
+        \hline
+        \textbf{Model} & \textbf{[C] Style}      & \textbf{[2] Motion}    & \textbf{[5] Char.}    & \textbf{Notes}                        \\ \hline
+        Kling          & \textbf{5} — Shinkai    & \textbf{5} — Fluid 2D  & \textbf{5} — Stable   & Best: aesthetic + physics + direction \\ \hline
+        Grok           & \textbf{5} — Retro SoL  & \textbf{3} — Stiff     & \textbf{5} — Stable   & Hallucinates hearts \& meowing        \\ \hline
+        Veo            & \textbf{1} — 3D CGI     & \textbf{5} — Flawless  & \textbf{5} — Stable   & Pixar look; ignored 2D medium         \\ \hline
+        Vidu           & \textbf{3} — Generic    & \textbf{3} — Rigid     & \textbf{4} — On model & Cartoon/anime hybrid                  \\ \hline
+        Seedance       & \textbf{3} — Borderline & \textbf{3} — Paw slide & \textbf{4} — Stable   & Lacks stylistic confidence            \\ \hline
+        LTX            & \textbf{1} — Vector     & \textbf{1} — Scissors  & \textbf{3} — Distorts & Fails style and physics               \\ \hline
+    \end{tabularx}
+    \caption{Prompt [C] — Anime Cat}
+    \label{tab:app_eval_prompt_7}
+\end{table}
+
 
 % -----------------------------------------------------------------------
 \section{Online Resources}
