@@ -2,7 +2,7 @@
 %%% Do NOT edit. File created by BibTeX with style
 %%% ACM-Reference-Format-Journals [18-Jan-2012].
 
-\begin{thebibliography}{10}
+\begin{thebibliography}{25}
 
 %%% ====================================================================
 %%% NOTE TO THE USER: you can override these defaults by providing
@@ -36,18 +36,65 @@
 \providecommand\natexlab[1]{#1}
 \providecommand\showeprint[2][]{arXiv:#2}
 
-\bibitem[Bao et~al\mbox{.}(2023)]%
-        {bao2023all}
-\bibfield{author}{\bibinfo{person}{Fan Bao}, \bibinfo{person}{Shen Nie}, \bibinfo{person}{Kaiwen Xue}, \bibinfo{person}{Yue Cao}, \bibinfo{person}{Chongxuan Li}, \bibinfo{person}{Hang Su}, {and} \bibinfo{person}{Jun Zhu}.} \bibinfo{year}{2023}\natexlab{}.
-\newblock \showarticletitle{All are Worth Words: A ViT Backbone for Diffusion Models}. In \bibinfo{booktitle}{\emph{Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}}.
+\bibitem[Bansal et~al\mbox{.}(2025)]%
+        {bansal2024videophy}
+\bibfield{author}{\bibinfo{person}{Hritik Bansal}, \bibinfo{person}{Zongyu Lin}, \bibinfo{person}{Tianyi Xie}, \bibinfo{person}{Zeshun Zong}, \bibinfo{person}{Michal Yarom}, \bibinfo{person}{Yonatan Bitton}, \bibinfo{person}{Chenfanfu Jiang}, \bibinfo{person}{Yizhou Sun}, \bibinfo{person}{Kai-Wei Chang}, {and} \bibinfo{person}{Aditya Grover}.} \bibinfo{year}{2025}\natexlab{}.
+\newblock \showarticletitle{{VideoPhy}: Evaluating Physical Commonsense for Video Generation}. In \bibinfo{booktitle}{\emph{International Conference on Learning Representations (ICLR)}}.
 \newblock
 
 
-\bibitem[DeepMind(2024)]%
+\bibitem[Bao et~al\mbox{.}(2023)]%
+        {bao2023all}
+\bibfield{author}{\bibinfo{person}{Fan Bao}, \bibinfo{person}{Shen Nie}, \bibinfo{person}{Kaiwen Xue}, \bibinfo{person}{Yue Cao}, \bibinfo{person}{Chongxuan Li}, \bibinfo{person}{Hang Su}, {and} \bibinfo{person}{Jun Zhu}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{All are Worth Words: A {ViT} Backbone for Diffusion Models}. In \bibinfo{booktitle}{\emph{Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}}.
+\newblock
+
+
+\bibitem[Brooks et~al\mbox{.}(2024)]%
+        {brooks2024sora}
+\bibfield{author}{\bibinfo{person}{Tim Brooks}, \bibinfo{person}{Bill Peebles}, \bibinfo{person}{Connor Holmes}, \bibinfo{person}{Will DePue}, \bibinfo{person}{Yufei Guo}, \bibinfo{person}{Li Jing}, \bibinfo{person}{David Schnurr}, \bibinfo{person}{Joe Taylor}, \bibinfo{person}{Troy Luhman}, \bibinfo{person}{Eric Luhman}, \bibinfo{person}{Clarence Ng}, \bibinfo{person}{Ricky Wang}, {and} \bibinfo{person}{Aditya Ramesh}.} \bibinfo{year}{2024}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Video Generation Models as World Simulators}}.
+\newblock \bibinfo{type}{{T}echnical {R}eport}. \bibinfo{institution}{OpenAI}.
+\newblock
+\urldef\tempurl%
+\url{https://openai.com/research/video-generation-models-as-world-simulators}
+\showURL{%
+\tempurl}
+
+
+\bibitem[{ByteDance Seed Team}(2026)]%
+        {bytedance2025seedance}
+\bibfield{author}{\bibinfo{person}{{ByteDance Seed Team}}.} \bibinfo{year}{2026}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Seedance: Native Multi-Shot Storytelling in Video Generation}}.
+\newblock \bibinfo{type}{{T}echnical {R}eport}. \bibinfo{institution}{ByteDance}.
+\newblock
+\urldef\tempurl%
+\url{https://seed.bytedance.com/seedance}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Chen et~al\mbox{.}(2023)]%
+        {chen2023videocrafter1}
+\bibfield{author}{\bibinfo{person}{Haoxin Chen}, \bibinfo{person}{Menghan Xia}, \bibinfo{person}{Yingqing He}, \bibinfo{person}{Yong Zhang}, \bibinfo{person}{Xiaodong Cun}, \bibinfo{person}{Shaoshu Yang}, \bibinfo{person}{Jinbo Xing}, \bibinfo{person}{Yaofang Liu}, \bibinfo{person}{Qifeng Chen}, \bibinfo{person}{Xintao Wang}, \bibinfo{person}{Chao Weng}, {and} \bibinfo{person}{Ying Shan}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{{VideoCrafter1}: Open Diffusion Models for High-Quality Video Generation}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2310.19512}} (\bibinfo{year}{2023}).
+\newblock
+
+
+\bibitem[Chen et~al\mbox{.}(2024)]%
+        {chen2024videocrafter2}
+\bibfield{author}{\bibinfo{person}{Haoxin Chen}, \bibinfo{person}{Yong Zhang}, \bibinfo{person}{Xiaodong Cun}, \bibinfo{person}{Menghan Xia}, \bibinfo{person}{Xintao Wang}, \bibinfo{person}{Chao Weng}, {and} \bibinfo{person}{Ying Shan}.} \bibinfo{year}{2024}\natexlab{}.
+\newblock \showarticletitle{{VideoCrafter2}: Overcoming Data Limitations for High-Quality Video Diffusion Models}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2401.09047}} (\bibinfo{year}{2024}).
+\newblock
+
+
+\bibitem[{Google DeepMind}(2024)]%
         {deepmind2024veo}
-\bibfield{author}{\bibinfo{person}{Google DeepMind}.} \bibinfo{year}{2024}\natexlab{}.
-\newblock \showarticletitle{Veo: A highly capable video generation model}.
-\newblock \bibinfo{journal}{\emph{Google DeepMind Technical Report}} (\bibinfo{year}{2024}).
+\bibfield{author}{\bibinfo{person}{{Google DeepMind}}.} \bibinfo{year}{2024}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Veo: A Highly Capable Video Generation Model}}.
+\newblock \bibinfo{type}{{T}echnical {R}eport}. \bibinfo{institution}{Google DeepMind}.
 \newblock
 \urldef\tempurl%
 \url{https://deepmind.google/technologies/veo/}
@@ -58,8 +105,30 @@
 \bibitem[Hacohen et~al\mbox{.}(2026)]%
         {hacohen2026ltx}
 \bibfield{author}{\bibinfo{person}{Amit Hacohen} {et~al\mbox{.}}} \bibinfo{year}{2026}\natexlab{}.
-\newblock \showarticletitle{LTX-2: Efficient Joint Audio-Visual Foundation Model}.
+\newblock \showarticletitle{{LTX-2}: Efficient Joint Audio-Visual Foundation Model}.
 \newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2601.03233}} (\bibinfo{year}{2026}).
+\newblock
+
+
+\bibitem[Ho et~al\mbox{.}(2020)]%
+        {ho2020ddpm}
+\bibfield{author}{\bibinfo{person}{Jonathan Ho}, \bibinfo{person}{Ajay Jain}, {and} \bibinfo{person}{Pieter Abbeel}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Denoising Diffusion Probabilistic Models}. In \bibinfo{booktitle}{\emph{Advances in Neural Information Processing Systems (NeurIPS)}}, Vol.~\bibinfo{volume}{33}. \bibinfo{pages}{6840--6851}.
+\newblock
+
+
+\bibitem[Hong et~al\mbox{.}(2022)]%
+        {hong2022cogvideo}
+\bibfield{author}{\bibinfo{person}{Wenyi Hong}, \bibinfo{person}{Ming Ding}, \bibinfo{person}{Wendi Zheng}, \bibinfo{person}{Xinghan Liu}, {and} \bibinfo{person}{Jie Tang}.} \bibinfo{year}{2022}\natexlab{}.
+\newblock \showarticletitle{{CogVideo}: Large-scale Pretraining for Text-to-Video Generation via Transformers}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2205.15868}} (\bibinfo{year}{2022}).
+\newblock
+
+
+\bibitem[Huang et~al\mbox{.}(2024)]%
+        {huang2024vbench}
+\bibfield{author}{\bibinfo{person}{Ziqi Huang}, \bibinfo{person}{Yinan He}, \bibinfo{person}{Jiashuo Yu}, \bibinfo{person}{Fan Zhang}, \bibinfo{person}{Chenyang Si}, \bibinfo{person}{Yuming Jiang}, \bibinfo{person}{Yuanhan Zhang}, \bibinfo{person}{Tianxing Wu}, \bibinfo{person}{Qingyang Jin}, \bibinfo{person}{Nattapol Chanpaisit}, {et~al\mbox{.}}} \bibinfo{year}{2024}\natexlab{}.
+\newblock \showarticletitle{{VBench}: Comprehensive Benchmark Suite for Video Generative Models}. In \bibinfo{booktitle}{\emph{Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}}.
 \newblock
 
 
@@ -71,31 +140,19 @@
 \href{https://doi.org/10.1109/ICCSA159793.2023.10421601}{doi:\nolinkurl{10.1109/ICCSA159793.2023.10421601}}
 
 
-\bibitem[Team(2025)]%
-        {alibaba2025wan}
-\bibfield{author}{\bibinfo{person}{Alibaba~Qwen Team}.} \bibinfo{year}{2025}\natexlab{}.
-\newblock \showarticletitle{Wan 2.2: Scaling Spatio-Temporal Diffusion Transformers for High-Fidelity Video Synthesis}.
-\newblock \bibinfo{journal}{\emph{Alibaba Cloud AI Technical Reports}} (\bibinfo{year}{2025}).
+\bibitem[Krippendorff(2011)]%
+        {krippendorff2011content}
+\bibfield{author}{\bibinfo{person}{Klaus Krippendorff}.} \bibinfo{year}{2011}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Content Analysis: An Introduction to Its Methodology} (\bibinfo{edition}{3rd} ed.)}.
+\newblock \bibinfo{publisher}{SAGE Publications}, \bibinfo{address}{Thousand Oaks, CA}.
 \newblock
 
 
-\bibitem[Team(2026)]%
-        {bytedance2025seedance}
-\bibfield{author}{\bibinfo{person}{ByteDance~Seed Team}.} \bibinfo{year}{2026}\natexlab{}.
-\newblock \showarticletitle{Seedance: Native Multi-Shot Storytelling in Video Generation}.
-\newblock \bibinfo{journal}{\emph{ByteDance Technical Report}} (\bibinfo{year}{2026}).
-\newblock
-\urldef\tempurl%
-\url{https://seed.bytedance.com/seedance}
-\showURL{%
-\tempurl}
-
-
-\bibitem[Technology(2026)]%
+\bibitem[{Kuaishou Technology}(2026)]%
         {kuaishou2025kling}
-\bibfield{author}{\bibinfo{person}{Kuaishou Technology}.} \bibinfo{year}{2026}\natexlab{}.
-\newblock \showarticletitle{Kling 3.0: Unified Multimodal Video Generation with 3D Spacetime Joint Attention}.
-\newblock \bibinfo{journal}{\emph{Kuaishou AI Research Group}} (\bibinfo{year}{2026}).
+\bibfield{author}{\bibinfo{person}{{Kuaishou Technology}}.} \bibinfo{year}{2026}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{{Kling} 3.0: Unified Multimodal Video Generation with 3D Spacetime Joint Attention}}.
+\newblock \bibinfo{type}{{T}echnical {R}eport}. \bibinfo{institution}{Kuaishou AI Research Group}.
 \newblock
 \urldef\tempurl%
 \url{https://kling.kuaishou.com/}
@@ -103,20 +160,90 @@
 \tempurl}
 
 
-\bibitem[Technology(2024)]%
+\bibitem[Liu et~al\mbox{.}(2024)]%
+        {liu2024evalcrafter}
+\bibfield{author}{\bibinfo{person}{Yaofang Liu}, \bibinfo{person}{Xiaodong Cun}, \bibinfo{person}{Xuebo Liu}, \bibinfo{person}{Xintao Wang}, \bibinfo{person}{Yong Zhang}, \bibinfo{person}{Haoxin Chen}, \bibinfo{person}{Yang Liu}, \bibinfo{person}{Tieyong Zeng}, \bibinfo{person}{Raymond Chan}, {and} \bibinfo{person}{Ying Shan}.} \bibinfo{year}{2024}\natexlab{}.
+\newblock \showarticletitle{{EvalCrafter}: Benchmarking and Evaluating Large Video Generation Models}. In \bibinfo{booktitle}{\emph{Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}}.
+\newblock
+
+
+\bibitem[{OpenAI}(2024)]%
+        {openai2024sora}
+\bibfield{author}{\bibinfo{person}{{OpenAI}}.} \bibinfo{year}{2024}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{Video Generation Models as World Simulators}}.
+\newblock \bibinfo{type}{{T}echnical {R}eport}. \bibinfo{institution}{OpenAI}.
+\newblock
+\urldef\tempurl%
+\url{https://openai.com/research/video-generation-models-as-world-simulators}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Peebles and Xie(2023)]%
+        {peebles2023dit}
+\bibfield{author}{\bibinfo{person}{William Peebles} {and} \bibinfo{person}{Saining Xie}.} \bibinfo{year}{2023}\natexlab{}.
+\newblock \showarticletitle{Scalable Diffusion Models with Transformers}. In \bibinfo{booktitle}{\emph{Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)}}. \bibinfo{pages}{4172--4182}.
+\newblock
+
+
+\bibitem[Rombach et~al\mbox{.}(2022)]%
+        {rombach2022ldm}
+\bibfield{author}{\bibinfo{person}{Robin Rombach}, \bibinfo{person}{Andreas Blattmann}, \bibinfo{person}{Dominik Lorenz}, \bibinfo{person}{Patrick Esser}, {and} \bibinfo{person}{Bj{\"o}rn Ommer}.} \bibinfo{year}{2022}\natexlab{}.
+\newblock \showarticletitle{High-Resolution Image Synthesis with Latent Diffusion Models}. In \bibinfo{booktitle}{\emph{Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}}. \bibinfo{pages}{10684--10695}.
+\newblock
+
+
+\bibitem[{ShengShu Technology}(2024)]%
         {shengshu2024vidu}
-\bibfield{author}{\bibinfo{person}{ShengShu Technology}.} \bibinfo{year}{2024}\natexlab{}.
-\newblock \showarticletitle{Vidu: Single-pass Text-to-Video Generation with U-ViT}.
-\newblock \bibinfo{journal}{\emph{ShengShu AI Research}} (\bibinfo{year}{2024}).
+\bibfield{author}{\bibinfo{person}{{ShengShu Technology}}.} \bibinfo{year}{2024}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{{Vidu}: Single-pass Text-to-Video Generation with {U-ViT}}}.
+\newblock \bibinfo{type}{{T}echnical {R}eport}. \bibinfo{institution}{ShengShu AI Research}.
+\newblock
+\urldef\tempurl%
+\url{https://www.vidu.io/}
+\showURL{%
+\tempurl}
+
+
+\bibitem[Sun et~al\mbox{.}(2024)]%
+        {sun2024t2vcompbench}
+\bibfield{author}{\bibinfo{person}{Kaiyue Sun}, \bibinfo{person}{Ziqi Huang}, \bibinfo{person}{Sinan Liu}, \bibinfo{person}{Qiuyue Wu}, \bibinfo{person}{Haoning Xu}, \bibinfo{person}{Zihan Li}, {and} \bibinfo{person}{Wenjing Liu}.} \bibinfo{year}{2024}\natexlab{}.
+\newblock \showarticletitle{{T2V-CompBench}: A Comprehensive Benchmark for Compositional Text-to-video Generation}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2407.14505}} (\bibinfo{year}{2024}).
 \newblock
 
 
-\bibitem[xAI Engineering(2025)]%
+\bibitem[{U.S. Copyright Office}(1976)]%
+        {usc2011fairuse}
+\bibfield{author}{\bibinfo{person}{{U.S. Copyright Office}}.} \bibinfo{year}{1976}\natexlab{}.
+\newblock \bibinfo{title}{17 {U.S.C.} \S~107: Limitations on Exclusive Rights --- Fair Use}.
+\newblock
+\urldef\tempurl%
+\url{https://www.copyright.gov/title17/92chap1.html#107}
+\showURL{%
+\tempurl}
+\newblock
+\shownote{As amended. United States Copyright Act}.
+
+
+\bibitem[{Wan Team, Alibaba Group}(2025)]%
+        {alibaba2025wan}
+\bibfield{author}{\bibinfo{person}{{Wan Team, Alibaba Group}}.} \bibinfo{year}{2025}\natexlab{}.
+\newblock \showarticletitle{{Wan}: Open and Advanced Large-Scale Video Generative Models}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2503.20314}} (\bibinfo{year}{2025}).
+\newblock
+
+
+\bibitem[{xAI Engineering}(2025)]%
         {xai2025grok}
-\bibfield{author}{\bibinfo{person}{xAI Engineering}.} \bibinfo{year}{2025}\natexlab{}.
-\newblock \showarticletitle{The State of Grok AI: Hybrid Architectures and Compute Efficiencies on Colossus}.
-\newblock \bibinfo{journal}{\emph{xAI Research Updates}} (\bibinfo{year}{2025}).
+\bibfield{author}{\bibinfo{person}{{xAI Engineering}}.} \bibinfo{year}{2025}\natexlab{}.
+\newblock \bibinfo{booktitle}{\emph{The State of {Grok} {AI}: Hybrid Architectures and Compute Efficiencies on Colossus}}.
+\newblock \bibinfo{type}{{T}echnical {R}eport}. \bibinfo{institution}{xAI}.
 \newblock
+\urldef\tempurl%
+\url{https://x.ai/}
+\showURL{%
+\tempurl}
 
 
 \bibitem[Xie et~al\mbox{.}(2025)]%
@@ -126,6 +253,14 @@
 \newblock \bibinfo{journal}{\emph{Chinese Journal of Electronics}} \bibinfo{volume}{34}, \bibinfo{number}{4} (\bibinfo{year}{2025}), \bibinfo{pages}{1009--1036}.
 \newblock
 \href{https://doi.org/10.23919/cje.2024.00.151}{doi:\nolinkurl{10.23919/cje.2024.00.151}}
+
+
+\bibitem[Yang et~al\mbox{.}(2024)]%
+        {yang2024cogvideox}
+\bibfield{author}{\bibinfo{person}{Zhuoyi Yang}, \bibinfo{person}{Jiayan Teng}, \bibinfo{person}{Wendi Zheng}, \bibinfo{person}{Ming Ding}, \bibinfo{person}{Shiyu Huang}, \bibinfo{person}{Jiazheng Xu}, {et~al\mbox{.}}} \bibinfo{year}{2024}\natexlab{}.
+\newblock \showarticletitle{{CogVideoX}: Text-to-Video Diffusion Models with An Expert Transformer}.
+\newblock \bibinfo{journal}{\emph{arXiv preprint arXiv:2408.06072}} (\bibinfo{year}{2024}).
+\newblock
 
 
 \end{thebibliography}

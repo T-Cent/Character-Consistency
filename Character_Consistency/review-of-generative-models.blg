@@ -1,0 +1,90 @@
+This is BibTeX, Version 0.99d (TeX Live 2025)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: review-of-generative-models.aux
+The style file: ACM-Reference-Format.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: sample-base.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Warning--empty publisher in bansal2024videophy
+Warning--empty address in bansal2024videophy
+Warning--page numbers missing in both pages and numpages fields in bansal2024videophy
+Warning--empty publisher in bao2023all
+Warning--empty address in bao2023all
+Warning--page numbers missing in both pages and numpages fields in bao2023all
+Warning--no number and no volume in chen2023videocrafter1
+Warning--page numbers missing in both pages and numpages fields in chen2023videocrafter1
+Warning--no number and no volume in chen2024videocrafter2
+Warning--page numbers missing in both pages and numpages fields in chen2024videocrafter2
+Warning--no number and no volume in hacohen2026ltx
+Warning--page numbers missing in both pages and numpages fields in hacohen2026ltx
+Warning--empty publisher in ho2020ddpm
+Warning--empty address in ho2020ddpm
+Warning--no number and no volume in hong2022cogvideo
+Warning--page numbers missing in both pages and numpages fields in hong2022cogvideo
+Warning--empty publisher in huang2024vbench
+Warning--empty address in huang2024vbench
+Warning--page numbers missing in both pages and numpages fields in huang2024vbench
+Warning--empty publisher in kaswan2023generative
+Warning--empty address in kaswan2023generative
+Warning--empty publisher in liu2024evalcrafter
+Warning--empty address in liu2024evalcrafter
+Warning--page numbers missing in both pages and numpages fields in liu2024evalcrafter
+Warning--empty publisher in peebles2023dit
+Warning--empty address in peebles2023dit
+Warning--empty publisher in rombach2022ldm
+Warning--empty address in rombach2022ldm
+Warning--no number and no volume in sun2024t2vcompbench
+Warning--page numbers missing in both pages and numpages fields in sun2024t2vcompbench
+Warning--no number and no volume in alibaba2025wan
+Warning--page numbers missing in both pages and numpages fields in alibaba2025wan
+Warning--no number and no volume in yang2024cogvideox
+Warning--page numbers missing in both pages and numpages fields in yang2024cogvideox
+You've used 25 entries,
+            6273 wiz_defined-function locations,
+            1793 strings with 25246 characters,
+and the built_in function-call counts, 27306 in all, are:
+= -- 3243
+> -- 1153
+< -- 0
++ -- 391
+- -- 406
+* -- 2088
+:= -- 2867
+add.period$ -- 129
+call.type$ -- 25
+change.case$ -- 223
+chr.to.int$ -- 25
+cite$ -- 59
+duplicate$ -- 2281
+empty$ -- 1612
+format.name$ -- 466
+if$ -- 6441
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 74
+newline$ -- 266
+num.names$ -- 175
+pop$ -- 1014
+preamble$ -- 1
+purify$ -- 415
+quote$ -- 0
+skip$ -- 827
+stack$ -- 0
+substring$ -- 1626
+swap$ -- 175
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 623
+warning$ -- 34
+while$ -- 134
+width$ -- 0
+write$ -- 530
+(There were 34 warnings)

@@ -1595,11 +1595,11 @@
   \fi
 }
 \if@ACM@journal\else
-\acmConference[Conference'17]{ACM Conference}{July 2017}{Washington,
+\acmConference[Conference'26]{SIGGRAPH Asia}{July 2026}{Washington,
   DC, USA}%
 \fi
 \def\acmBooktitle#1{\gdef\@acmBooktitle{#1}}
-\acmBooktitle{}
+\acmBooktitle{Proceedings of SIGGRAPH Asia}
 \def\@editorsAbbrev{(Ed.)}
 \def\@acmEditors{}
 \def\editor#1{\ifx\@acmEditors\@empty
